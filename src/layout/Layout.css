@@ -1,0 +1,15 @@
+.app {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100vh;
+  background: var(--paper);
+  transition: grid-template-columns .3s cubic-bezier(.3, .7, .4, 1);
+}
+.app.sidebar-closed { grid-template-columns: 0 1fr; }
+.app.focus { grid-template-columns: 0 1fr; }
+.app.focus .sidebar { transform: translateX(-100%); }
+.app.sidebar-closed .sidebar { transform: translateX(-100%); }
+
+@media (max-width: 880px) {
+  .app { grid-template-columns: 1fr; }
+}

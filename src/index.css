@@ -1,12 +1,97 @@
-@font-face{
+@font-face {
   font-family: 'Ranade Regular';
   src: url('./assets/fonts/Ranade-Regular.woff2') format('woff2');
-  font-weight: 400 ; 
-  font-style: normal; 
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
   font-family: 'Ranade Bold';
   src: url('./assets/fonts/Ranade-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+}
+
+:root {
+  --accent: #c2603a;
+  --ink: #1f1d1a;
+  --paper: #f6f1e8;
+  --reader-fs: 17px;
+
+  --paper-2: color-mix(in oklab, var(--paper) 92%, var(--ink));
+  --paper-3: color-mix(in oklab, var(--paper) 84%, var(--ink));
+  --ink-2: color-mix(in oklab, var(--ink) 70%, var(--paper));
+  --ink-3: color-mix(in oklab, var(--ink) 45%, var(--paper));
+  --ink-4: color-mix(in oklab, var(--ink) 22%, var(--paper));
+  --rule:  color-mix(in oklab, var(--ink) 12%, var(--paper));
+  --rule-2: color-mix(in oklab, var(--ink) 20%, var(--paper));
+  --accent-soft: color-mix(in oklab, var(--accent) 16%, var(--paper));
+  --accent-softer: color-mix(in oklab, var(--accent) 8%, var(--paper));
+  --accent-ink: color-mix(in oklab, var(--accent) 80%, var(--ink));
+  --highlight-bg: color-mix(in oklab, var(--accent) 26%, var(--paper));
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .04), 0 1px 3px rgba(0, 0, 0, .04);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, .04), 0 8px 24px -8px rgba(0, 0, 0, .12);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, .06), 0 24px 48px -16px rgba(0, 0, 0, .18);
+}
+
+[data-theme='dark'] {
+  --paper: #15140f;
+  --ink: #f3ede0;
+  --paper-2: color-mix(in oklab, var(--paper) 88%, var(--ink));
+  --paper-3: color-mix(in oklab, var(--paper) 78%, var(--ink));
+  --rule:   color-mix(in oklab, var(--ink) 18%, var(--paper));
+  --rule-2: color-mix(in oklab, var(--ink) 28%, var(--paper));
+  --accent-soft: color-mix(in oklab, var(--accent) 22%, var(--paper));
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, .3), 0 8px 24px -8px rgba(0, 0, 0, .5);
+}
+
+[data-fontpair='serif-classic'] {
+  --f-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --f-body:    'Inter', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+[data-fontpair='humanist'] {
+  --f-display: 'Lora', Georgia, serif;
+  --f-body:    'Geist', 'Inter', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', monospace;
+}
+[data-fontpair='modern-sans'] {
+  --f-display: 'Geist', 'Inter', system-ui, sans-serif;
+  --f-body:    'Geist', system-ui, sans-serif;
+  --f-mono:    'Geist Mono', ui-monospace, monospace;
+}
+[data-fontpair='editorial'] {
+  --f-display: 'DM Serif Display', Georgia, serif;
+  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono:    'IBM Plex Mono', monospace;
+}
+
+[data-density='compact']  { --gap: 14px; --pad: 18px; --line: 1.55; }
+[data-density='regular']  { --gap: 20px; --pad: 28px; --line: 1.7; }
+[data-density='comfy']    { --gap: 28px; --pad: 40px; --line: 1.85; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--highlight-bg); color: var(--ink); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--ink) 18%, transparent);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--ink) 30%, transparent);
+  background-clip: padding-box;
+  border: 2px solid transparent;
 }

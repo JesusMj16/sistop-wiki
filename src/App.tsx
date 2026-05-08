@@ -1,16 +1,7 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
+import './App.css';
 
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <h1>Hola mi primer app con react</h1>
-    </>
-  )
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App

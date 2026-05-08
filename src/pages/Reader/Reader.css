@@ -1,0 +1,45 @@
+.reader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.read-progress {
+  position: sticky;
+  top: 0;
+  height: 2px;
+  z-index: 11;
+  background: transparent;
+  pointer-events: none;
+}
+.read-progress-bar {
+  height: 100%;
+  width: var(--p, 0%);
+  background: linear-gradient(90deg,
+    var(--accent),
+    color-mix(in oklab, var(--accent) 60%, var(--ink)));
+  box-shadow: 0 0 8px var(--accent-soft);
+  transition: width .15s linear;
+}
+
+.article {
+  flex: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--pad) 32px 120px;
+  animation: noteEnter .3s cubic-bezier(.3, .7, .4, 1);
+}
+@keyframes noteEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.app.focus .article { max-width: 700px; }
+
+@media (max-width: 880px) {
+  .article { padding: 24px 22px 100px; }
+}

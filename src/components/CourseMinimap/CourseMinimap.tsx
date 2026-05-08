@@ -2,7 +2,7 @@ import { useCourse } from '../../context/CourseContext';
 import './CourseMinimap.css';
 
 export default function CourseMinimap() {
-  const { course, completed, activeNote, setActiveNote } = useCourse();
+  const { course, completed, activeNote, goToNote } = useCourse();
   return (
     <div className="minimap" role="navigation" aria-label="Mapa del curso">
       {course.sections.map(sec => (
@@ -19,7 +19,7 @@ export default function CourseMinimap() {
                 className={cls.join(' ')}
                 aria-label={n.title}
                 title={n.title}
-                onClick={() => setActiveNote(sec.id, n.id)}
+                onClick={() => goToNote(sec, n)}
               />
             );
           })}

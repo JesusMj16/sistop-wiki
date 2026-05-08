@@ -5,7 +5,7 @@ import TocSection from './TocSection';
 import './SideBar.css';
 
 export default function SideBar() {
-  const { course, pct, doneCount, totalNotes, setActiveNote, searchResults } = useCourse();
+  const { course, pct, doneCount, totalNotes, goToNote, searchResults } = useCourse();
   const { setSidebarOpen, search, setSearch } = useUI();
   const filtered = search.trim() ? searchResults(search) : null;
 
@@ -54,7 +54,7 @@ export default function SideBar() {
               <button
                 key={n.id}
                 className="toc-result"
-                onClick={() => { setActiveNote(sec.id, n.id); setSearch(''); }}
+                onClick={() => { goToNote(sec, n); setSearch(''); }}
               >
                 <div className="toc-result-sec">{sec.number} · {sec.title}</div>
                 <div className="toc-result-note">{n.title}</div>

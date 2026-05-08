@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function TocSection({ section }: Props) {
-  const { activeSection, activeNote, completed, bookmarks, setActiveNote, toggleCompleted } = useCourse();
+  const { activeSection, activeNote, completed, bookmarks, goToNote, toggleCompleted } = useCourse();
   const isActive = activeSection.id === section.id;
   const [open, setOpen] = useState(isActive);
 
@@ -46,7 +46,7 @@ export default function TocSection({ section }: Props) {
                 >
                   {isDone ? <CheckIcon /> : <CircleIcon />}
                 </button>
-                <button className="toc-note-btn" onClick={() => setActiveNote(section.id, n.id)}>
+                <button className="toc-note-btn" onClick={() => goToNote(section, n)}>
                   <span className="toc-note-title">{n.title}</span>
                   <span className="toc-note-kind">{KIND_LABEL[n.kind]}</span>
                 </button>

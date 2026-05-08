@@ -119,11 +119,27 @@
 .tool-done svg { width: 13px; height: 13px; }
 
 .note-body {
-  padding: 30px 30px 12px;
+  padding: 36px 30px 18px;
   font-size: var(--reader-fs);
   line-height: var(--line);
 }
-.note-body > * + * { margin-top: var(--gap); }
+.note-body > * + * { margin-top: calc(var(--gap) * 1.4); }
+.note-body > .prose-p + .prose-p { margin-top: calc(var(--gap) * 1.1); }
+.note-body > .prose-title-h2 { margin-top: calc(var(--gap) * 2.4); }
+.note-body > .prose-title-h3 { margin-top: calc(var(--gap) * 2); }
+.note-body > .prose-title-h4 { margin-top: calc(var(--gap) * 1.6); }
+.note-body > .prose-title + * { margin-top: calc(var(--gap) * 0.9); }
+.note-body > .callout,
+.note-body > .prose-quote,
+.note-body > .prose-table-wrap,
+.note-body > .thinkers,
+.note-body > .diagram { margin-top: calc(var(--gap) * 1.7); }
+.note-body > .callout + *,
+.note-body > .prose-quote + *,
+.note-body > .prose-table-wrap + *,
+.note-body > .thinkers + *,
+.note-body > .diagram + * { margin-top: calc(var(--gap) * 1.7); }
+.note-body > *:first-child { margin-top: 0; }
 
 .note-body > .prose-p:first-child::first-letter {
   font-family: var(--f-display);

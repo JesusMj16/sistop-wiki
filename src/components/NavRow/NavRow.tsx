@@ -3,14 +3,14 @@ import { ArrowIcon } from '../Icons/Icons';
 import './NavRow.css';
 
 export default function NavRow() {
-  const { prev, next, setActiveNote } = useCourse();
+  const { prev, next, goToNote } = useCourse();
 
   return (
     <div className="navrow">
       <button
         className="nav-btn nav-prev"
         disabled={!prev}
-        onClick={() => prev && setActiveNote(prev.sec.id, prev.n.id)}
+        onClick={() => prev && goToNote(prev.sec, prev.n)}
       >
         {prev ? (
           <>
@@ -25,7 +25,7 @@ export default function NavRow() {
       <button
         className="nav-btn nav-next"
         disabled={!next}
-        onClick={() => next && setActiveNote(next.sec.id, next.n.id)}
+        onClick={() => next && goToNote(next.sec, next.n)}
       >
         {next ? (
           <>

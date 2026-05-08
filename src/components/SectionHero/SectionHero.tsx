@@ -1,5 +1,4 @@
 import { useCourse } from '../../context/CourseContext';
-import { ClockIcon } from '../Icons/Icons';
 import './SectionHero.css';
 
 export default function SectionHero() {

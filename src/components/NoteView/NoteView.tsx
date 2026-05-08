@@ -1,8 +1,8 @@
+import { Outlet } from 'react-router-dom';
 import { useCourse } from '../../context/CourseContext';
 import { useUI } from '../../context/UIContext';
 import { ArrowIcon, BookmarkIcon, BookmarkOIcon, CheckIcon, CircleIcon, PencilIcon } from '../Icons/Icons';
 import { KIND_ICON, KIND_LABEL } from '../../data/noteKindMeta';
-import BlockRenderer from '../BlockRenderer/BlockRenderer';
 import './NoteView.css';
 
 export default function NoteView() {
@@ -50,7 +50,7 @@ export default function NoteView() {
         </div>
 
         <article className="note-body">
-          {activeNote.body.map((b, i) => <BlockRenderer key={i} block={b} />)}
+          <Outlet />
         </article>
 
         <div className="note-foot">

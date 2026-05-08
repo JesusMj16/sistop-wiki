@@ -1,8 +1,7 @@
 import { useCourse } from '../../context/CourseContext';
 import { useUI } from '../../context/UIContext';
-import { ClockIcon, MenuIcon, PencilIcon } from '../Icons/Icons';
+import { MenuIcon, PencilIcon } from '../Icons/Icons';
 import CourseMinimap from '../CourseMinimap/CourseMinimap';
-import { estimateReadMinutes } from '../../utils/readTime';
 import './Topbar.css';
 
 export default function Topbar() {

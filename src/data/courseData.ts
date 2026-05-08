@@ -66,7 +66,7 @@ export const COURSE: Course = {
          {
           id: 'n1-1',
           title: 'Introducción a Procesos',
-          kind: 'lectura',
+          kind: 'sintesis',
           body: []
         }
 

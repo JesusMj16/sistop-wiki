@@ -53,6 +53,12 @@ export const COURSE: Course = {
           title: 'Identificar Procesos',
           kind: 'concepto',
           path: 'identify-process',
+        },
+        {
+          id: 'n2-5',
+          title: 'Llamadas de wait',
+          kind: 'concepto',
+          path: 'llamada-wait',
         }
         
       ],

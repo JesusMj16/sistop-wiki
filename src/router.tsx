@@ -6,6 +6,10 @@ import IntroProcesos from './pages/notes/IntroProcesos';
 import CtrlProcesos from './pages/notes/CtrlProcesos';
 import Systemcall from './pages/notes/Systemcall';
 import IdentifyProcess from './pages/notes/IdentifyProcess';
+import callWait from './pages/notes/callWait';
+
+
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -19,7 +23,8 @@ export const router = createBrowserRouter([
           { path: 'procesos/intro-procesos', Component: IntroProcesos },
           {path: 'procesos/control-procesos', Component:CtrlProcesos },
           {path: 'procesos/systemcall-procesos', Component: Systemcall},
-          { path: 'procesos/identify-process', Component: IdentifyProcess}
+          { path: 'procesos/identify-process', Component: IdentifyProcess},
+          { path: 'procesos/llamada-wait', Component: callWait } 
         ],
       },
     ],

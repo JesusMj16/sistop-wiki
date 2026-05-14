@@ -15,13 +15,6 @@ export default function Systemcall() {
         y, desde ese punto, ambos procesos siguen su vida por separado.
       </P>
 
-      <Callout tone="info" title="Copy-on-Write">
-        Aunque el hijo recibe una copia lógica del espacio de direcciones del padre, en Linux moderno esa copia
-        <strong> no se materializa </strong> hasta que alguno de los dos procesos modifica una página de memoria.
-        Mientras nadie escriba, ambos comparten las mismas páginas físicas marcadas como solo-lectura. Esto hace
-        que <em>fork()</em> sea barato incluso cuando el padre usa gigabytes de memoria.
-      </Callout>
-
       <CowAnimation />
 
       <H3>Prototipo de la función</H3>

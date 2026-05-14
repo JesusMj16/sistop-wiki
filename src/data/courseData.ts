@@ -48,6 +48,12 @@ export const COURSE: Course = {
           kind: 'concepto',
           path: 'systemcall-procesos',
         },
+        {
+          id:'n2-4',
+          title: 'Identificar Procesos',
+          kind: 'concepto',
+          path: 'identify-process',
+        }
         
       ],
     },

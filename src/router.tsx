@@ -5,6 +5,7 @@ import IntroSO from './pages/notes/IntroSO';
 import IntroProcesos from './pages/notes/IntroProcesos';
 import CtrlProcesos from './pages/notes/CtrlProcesos';
 import Systemcall from './pages/notes/Systemcall';
+import IdentifyProcess from './pages/notes/IdentifyProcess';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -17,7 +18,8 @@ export const router = createBrowserRouter([
           { path: 'introduccion/sistemas-operativos', Component: IntroSO },
           { path: 'procesos/intro-procesos', Component: IntroProcesos },
           {path: 'procesos/control-procesos', Component:CtrlProcesos },
-          {path: 'procesos/systemcall-procesos', Component: Systemcall}
+          {path: 'procesos/systemcall-procesos', Component: Systemcall},
+          { path: 'procesos/identify-process', Component: IdentifyProcess}
         ],
       },
     ],

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useState } from 'react';
 import { BulbIcon, WarnIcon, CircleIcon, CheckIcon } from '../Icons/Icons';
 import './prose.css';
 
@@ -175,14 +176,14 @@ export function ForkTree() {
 
         <div className="fork-node fork-child fork-parent-after fork-pos-left">
           <div className="fork-node-pid">PID 1042</div>
-          <div className="fork-node-label">Padre (sigue)</div>
+          <div className="fork-node-label">Padre</div>
           <div className="fork-node-ret">retorno &gt; 0</div>
           <div className="fork-node-note">if (pid != 0)</div>
         </div>
 
         <div className="fork-node fork-child fork-child-new fork-pos-right">
           <div className="fork-node-pid">PID 1043</div>
-          <div className="fork-node-label">Hijo (nuevo)</div>
+          <div className="fork-node-label">Hijo</div>
           <div className="fork-node-ret">retorno = 0</div>
           <div className="fork-node-note">if (pid == 0)</div>
         </div>
@@ -234,6 +235,163 @@ export function Thinkers({ items }: { items: ThinkerItem[] }) {
           </div>
         </article>
       ))}
+    </div>
+  );
+}
+
+const STEPS = [
+  {
+    label: 'ANTES DE fork()',
+    desc: 'El proceso padre tiene 3 páginas virtuales. Cada una apunta a una página física real en la RAM. La memoria física existe y es propiedad del padre.',
+  },
+  {
+    label: 'fork() — COPIA LÓGICA',
+    desc: 'El kernel crea el hijo. En lugar de copiar la RAM, ambos procesos apuntan a las MISMAS páginas físicas. Las páginas se marcan como solo-lectura. No se copió ni un byte todavía.',
+  },
+  {
+    label: 'HIJO ESCRIBE → COW DISPARA',
+    desc: 'El hijo intenta escribir en la Página 1. El hardware detecta que es solo-lectura → genera una falla. El kernel intercepta, crea una COPIA física solo de esa página, y la asigna al hijo.',
+  },
+  {
+    label: 'RESULTADO FINAL',
+    desc: 'La Página 1 ahora existe dos veces en RAM: una para el padre, otra para el hijo. Las páginas 2 y 3 siguen compartidas (nadie las modificó). El padre nunca sintió nada.',
+  },
+];
+
+export function CowAnimation() {
+  const [step, setStep] = useState(0);
+  const [cowFlash, setCowFlash] = useState(false);
+
+  function goTo(s: number) {
+    if (s === 2 && step !== 2) setCowFlash(true);
+    else setCowFlash(false);
+    setStep(s);
+  }
+
+  const showChild = step >= 1;
+  const cowTriggered = step >= 2;
+  const finalState = step === 3;
+
+  return (
+    <div className="cow-wrap">
+      <div className="cow-header">
+        <span className="cow-step-badge">PASO {step + 1}/4</span>
+        <span className="cow-step-label">{STEPS[step].label}</span>
+      </div>
+
+      <div className="cow-stage">
+        {/* PROCESOS */}
+        <div className="cow-processes">
+          {/* PADRE */}
+          <div className="cow-proc cow-proc-padre">
+            <div className="cow-proc-tag">PID 1042</div>
+            <div className="cow-proc-name">PADRE</div>
+            <div className="cow-virt-pages">
+              {[0, 1, 2].map(i => (
+                <div key={i} className={`cow-vpage ${cowTriggered && i === 0 ? 'cow-vpage-write' : ''}`}>
+                  <span className="cow-vpage-label">Pág virtual {i + 1}</span>
+                  {cowTriggered && i === 0 && <span className="cow-vpage-mode">RW</span>}
+                  {showChild && !finalState && i !== 0 && <span className="cow-vpage-mode cow-ro">RO</span>}
+                  {showChild && finalState && i !== 0 && <span className="cow-vpage-mode cow-ro">RO</span>}
+                  {showChild && finalState && i === 0 && <span className="cow-vpage-mode">RW</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* HIJO */}
+          <div className={`cow-proc cow-proc-hijo ${showChild ? 'cow-proc-visible' : ''}`}>
+            <div className="cow-proc-tag">PID 1043</div>
+            <div className="cow-proc-name">HIJO</div>
+            <div className="cow-virt-pages">
+              {[0, 1, 2].map(i => (
+                <div key={i} className={`cow-vpage cow-vpage-child ${cowTriggered && i === 0 ? 'cow-vpage-writing' : ''}`}>
+                  <span className="cow-vpage-label">Pág virtual {i + 1}</span>
+                  {cowTriggered && i === 0 && <span className="cow-vpage-mode cow-write-badge">ESCRIBE!</span>}
+                  {(!cowTriggered || i !== 0) && showChild && <span className="cow-vpage-mode cow-ro">RO</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* FLECHAS SVG */}
+        <svg className="cow-arrows" viewBox="0 0 700 120" preserveAspectRatio="none">
+          {/* Padre → físicas */}
+          <line x1="105" y1="0" x2="120" y2="120" className="cow-arrow cow-arrow-padre" />
+          <line x1="175" y1="0" x2="350" y2="120" className="cow-arrow cow-arrow-padre" />
+          <line x1="245" y1="0" x2="580" y2="120" className="cow-arrow cow-arrow-padre" />
+          {/* Hijo → físicas */}
+          {showChild && <>
+            <line x1="455" y1="0" x2={finalState ? "170" : "120"} y2="120" className={`cow-arrow cow-arrow-hijo ${cowTriggered && !finalState ? 'cow-arrow-cow' : ''}`} />
+            <line x1="525" y1="0" x2="350" y2="120" className="cow-arrow cow-arrow-hijo" />
+            <line x1="595" y1="0" x2="580" y2="120" className="cow-arrow cow-arrow-hijo" />
+          </>}
+          {cowFlash && !finalState && (
+            <text x="350" y="65" className="cow-flash-text" textAnchor="middle">⚡ COW!</text>
+          )}
+        </svg>
+
+        {/* RAM — PÁGINAS FÍSICAS */}
+        <div className="cow-ram">
+          <div className="cow-ram-label">RAM — MEMORIA FÍSICA</div>
+          <div className="cow-phys-pages">
+            {/* Página física 1 */}
+            <div className={`cow-ppage ${cowTriggered ? 'cow-ppage-split' : ''}`}>
+              {!cowTriggered && (
+                <div className="cow-ppage-inner">
+                  <span className="cow-ppage-addr">0x4A00</span>
+                  <span className="cow-ppage-name">Página 1</span>
+                  {showChild && <span className="cow-ppage-shared">COMPARTIDA</span>}
+                </div>
+              )}
+              {cowTriggered && (
+                <>
+                  <div className="cow-ppage-inner cow-ppage-padre-copy">
+                    <span className="cow-ppage-addr">0x4A00</span>
+                    <span className="cow-ppage-name">Pág 1</span>
+                    <span className="cow-ppage-owner">PADRE</span>
+                  </div>
+                  <div className="cow-ppage-inner cow-ppage-hijo-copy">
+                    <span className="cow-ppage-addr">0x7F00</span>
+                    <span className="cow-ppage-name">Pág 1</span>
+                    <span className="cow-ppage-owner">HIJO</span>
+                    <span className="cow-ppage-new-badge">NUEVA</span>
+                  </div>
+                </>
+              )}
+            </div>
+            {/* Página física 2 */}
+            <div className="cow-ppage">
+              <div className="cow-ppage-inner">
+                <span className="cow-ppage-addr">0x5B00</span>
+                <span className="cow-ppage-name">Página 2</span>
+                {showChild && <span className="cow-ppage-shared">COMPARTIDA</span>}
+              </div>
+            </div>
+            {/* Página física 3 */}
+            <div className="cow-ppage">
+              <div className="cow-ppage-inner">
+                <span className="cow-ppage-addr">0x6C00</span>
+                <span className="cow-ppage-name">Página 3</span>
+                {showChild && <span className="cow-ppage-shared">COMPARTIDA</span>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* DESCRIPCION */}
+      <div className="cow-desc">{STEPS[step].desc}</div>
+
+      {/* CONTROLES */}
+      <div className="cow-controls">
+        <button className="cow-btn" onClick={() => goTo(Math.max(0, step - 1))} disabled={step === 0}>← Anterior</button>
+        {[0, 1, 2, 3].map(i => (
+          <button key={i} className={`cow-dot ${step === i ? 'cow-dot-active' : ''}`} onClick={() => goTo(i)} />
+        ))}
+        <button className="cow-btn" onClick={() => goTo(Math.min(3, step + 1))} disabled={step === 3}>Siguiente →</button>
+      </div>
     </div>
   );
 }

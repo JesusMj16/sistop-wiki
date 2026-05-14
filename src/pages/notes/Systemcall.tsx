@@ -1,4 +1,4 @@
-import { P, List, H2, H3, Code, Callout, ProcessFan, ForkTree, CodeExplain } from '../../components/ui/Prose';
+import { P, List, H2, H3, Code, Callout, ProcessFan, ForkTree, CodeExplain, CowAnimation } from '../../components/ui/Prose';
 
 export default function Systemcall() {
   return (
@@ -21,6 +21,8 @@ export default function Systemcall() {
         Mientras nadie escriba, ambos comparten las mismas páginas físicas marcadas como solo-lectura. Esto hace
         que <em>fork()</em> sea barato incluso cuando el padre usa gigabytes de memoria.
       </Callout>
+
+      <CowAnimation />
 
       <H3>Prototipo de la función</H3>
       <Code title="fork.h">{`#include <sys/types.h>
@@ -69,9 +71,8 @@ pid_t fork(void);`}</Code>
         title="ejemplo1.c"
         lines={[
           { code: '#include <sys/types.h>', note: 'Tipos básicos del sistema, incluido pid_t (el tipo entero usado para PIDs).' },
-          { code: '#include <stdlib.h>', note: 'Define EXIT_SUCCESS y EXIT_FAILURE — códigos de salida portables.' },
+          { code: '#include <stdlib.h>', note: 'Define EXIT_SUCCESS y EXIT_FAILURE para códigos de salida.' },
           { code: '#include <unistd.h>', note: 'Cabecera estándar POSIX. Aquí vive la declaración de fork().' },
-          { code: '' },
           { code: 'int main(void) {' },
           { code: '    int x = 0;', note: 'Variable local en el espacio de direcciones del padre. Por ahora solo existe una.' },
           { code: '    fork();', note: 'Punto de bifurcación. El kernel duplica el proceso. A partir de aquí hay DOS procesos ejecutándose, cada uno con su propia copia de x.' },
@@ -82,7 +83,7 @@ pid_t fork(void);`}</Code>
       />
 
       <P>
-        El código es idéntico, pero cada proceso tiene su propio espacio de direcciones. La <em>x</em> en el padre y la <em>x</em>
+        El código es idéntico, pero cada proceso tiene su propio espacio de direcciones. La x en el padre y la x
         en el hijo son <strong>variables diferentes</strong>, almacenadas en páginas físicas distintas (o en la misma página
         compartida hasta que alguien escribe, gracias a COW).
       </P>
@@ -105,7 +106,7 @@ pid_t fork(void);`}</Code>
       <List>
         <li><strong>El PID:</strong> el hijo recibe un identificador nuevo. Imposible que coincida con el del padre.</li>
         <li><strong>Tiempos de CPU acumulados:</strong> el hijo arranca con contador en cero, aunque el padre lleve horas corriendo.</li>
-        <li><strong>Bloqueos (locks) sobre archivos:</strong> el hijo no hereda los locks del padre — debe pedirlos por su cuenta.</li>
+        <li><strong>Bloqueos (locks) sobre archivos:</strong> el hijo no hereda los locks del padre.</li>
         <li><strong>Alarmas pendientes:</strong> un <em>alarm()</em> programado por el padre no le llegará al hijo.</li>
         <li><strong>Señales pendientes:</strong> si el padre tenía señales sin entregar al momento del fork, el hijo arranca limpio.</li>
       </List>
@@ -125,14 +126,13 @@ pid_t fork(void);`}</Code>
       <CodeExplain
         title="ejemplo2.c"
         lines={[
-          { code: '#include <stdio.h>', note: 'Para printf — escribiremos al stdout, que ambos procesos comparten.' },
+          { code: '#include <stdio.h>', note: 'Para el uso de printf' },
           { code: '#include <stdlib.h>', note: 'EXIT_SUCCESS.' },
           { code: '#include <sys/types.h>', note: 'pid_t.' },
           { code: '#include <unistd.h>', note: 'fork() y getpid().' },
-          { code: '' },
           { code: 'int main(void) {' },
           { code: '    int x = 0;', note: 'Estado inicial común. La página que contiene x es compartida (COW) entre padre e hijo justo después del fork.' },
-          { code: '    pid_t pid;', note: 'Aquí guardaremos el valor de retorno de fork(). Su valor es DISTINTO en cada proceso — esa es la clave.' },
+          { code: '    pid_t pid;', note: 'Aquí guardaremos el valor de retorno de fork(). Su valor es DISTINTO en cada proceso.' },
           { code: '    pid = fork();', note: 'Punto de bifurcación. A partir de esta línea hay dos procesos. El siguiente if se evalúa en cada uno con un pid distinto.' },
           { code: '    if (pid == 0) {', note: 'CAMINO DEL HIJO. fork() devolvió 0 solo aquí.' },
           { code: '        /* Código del hijo */' },
@@ -142,7 +142,6 @@ pid_t fork(void);`}</Code>
           { code: '        /* Código del padre */' },
           { code: '        x = 10;', note: 'El padre también escribe. COW se dispara también para él (o ya se disparó al modificar el hijo). Ahora cada proceso tiene su propia página.' },
           { code: '        printf("Padre: PID=%ld, x=%d\\n", (long)getpid(), x);', note: 'El padre imprime SU PID (distinto al del hijo) y x = 10.' },
-          { code: '    }' },
           { code: '    return EXIT_SUCCESS;', note: 'Ambos procesos llegan aquí por su cuenta y terminan independientemente.' },
           { code: '}' },
         ]}

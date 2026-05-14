@@ -799,3 +799,299 @@
   line-height: 1.5;
   border-top: 2px solid #000;
 }
+
+/* ── COW ANIMATION ── */
+.cow-wrap {
+  margin: 28px 0;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0 #000;
+  background: #fff;
+  font-family: "Arial", sans-serif;
+  overflow: hidden;
+}
+.cow-header {
+  background: #000;
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cow-step-badge {
+  background: #ffd84a;
+  color: #000;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  padding: 3px 8px;
+  flex-shrink: 0;
+}
+.cow-step-label {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.cow-stage {
+  padding: 20px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+/* PROCESOS */
+.cow-processes {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.cow-proc {
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  padding: 10px 12px;
+  width: 48%;
+  max-width: 280px;
+  background: var(--accent, #50aaff);
+  transition: opacity .4s, transform .4s;
+}
+.cow-proc-hijo {
+  opacity: 0;
+  transform: translateY(-10px);
+  background: #ffd84a;
+  pointer-events: none;
+}
+.cow-proc-hijo.cow-proc-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.cow-proc-tag {
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  padding: 2px 6px;
+  display: inline-block;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.cow-proc-name {
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 8px;
+  letter-spacing: -.01em;
+}
+.cow-virt-pages {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cow-vpage {
+  background: #fff;
+  border: 2px solid #000;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background .3s, border-color .3s;
+}
+.cow-vpage-writing {
+  background: #ff6060;
+  border-color: #c00;
+  animation: cowShake .25s ease-in-out 2;
+}
+@keyframes cowShake {
+  0%,100% { transform: translateX(0); }
+  30% { transform: translateX(-4px); }
+  70% { transform: translateX(4px); }
+}
+.cow-vpage-mode {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  padding: 2px 5px;
+  border: 1.5px solid #000;
+  background: #000;
+  color: #fff;
+}
+.cow-ro { background: #888; border-color: #555; }
+.cow-write-badge {
+  background: #c00;
+  color: #fff;
+  border-color: #900;
+  animation: pulseBadge 1s ease-in-out infinite;
+}
+/* ARROWS SVG */
+.cow-arrows {
+  width: 100%;
+  height: 60px;
+  margin: 4px 0 0;
+  overflow: visible;
+}
+.cow-arrow {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.cow-arrow-padre { stroke: #1a6fcc; }
+.cow-arrow-hijo { stroke: #b8900a; transition: stroke .3s; }
+.cow-arrow-cow { stroke: #c00; stroke-width: 3; }
+.cow-flash-text {
+  font-family: "Arial", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  fill: #c00;
+  animation: flashPop .5s ease-out both;
+}
+@keyframes flashPop {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+}
+/* RAM */
+.cow-ram {
+  border: 3px solid #000;
+  background: #18192b;
+  padding: 10px 12px;
+  margin-top: 0;
+}
+.cow-ram-label {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+.cow-phys-pages {
+  display: flex;
+  gap: 10px;
+}
+.cow-ppage {
+  flex: 1;
+  border: 2px solid #444;
+  background: #2a2b3d;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all .4s;
+}
+.cow-ppage-split {
+  flex-direction: row;
+}
+.cow-ppage-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 6px;
+  gap: 3px;
+  flex: 1;
+}
+.cow-ppage-addr {
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #888;
+  letter-spacing: .05em;
+}
+.cow-ppage-name {
+  font-size: 11px;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.cow-ppage-shared {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  color: #ffd84a;
+  border: 1.5px solid #ffd84a;
+  padding: 1px 5px;
+  text-transform: uppercase;
+}
+.cow-ppage-owner {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  padding: 1px 5px;
+  text-transform: uppercase;
+}
+.cow-ppage-padre-copy {
+  background: #1a3a6f;
+  border-right: 2px solid #444;
+}
+.cow-ppage-padre-copy .cow-ppage-owner { color: #6ab0ff; border: 1.5px solid #6ab0ff; }
+.cow-ppage-hijo-copy {
+  background: #4a3a00;
+  position: relative;
+}
+.cow-ppage-hijo-copy .cow-ppage-owner { color: #ffd84a; border: 1.5px solid #ffd84a; }
+.cow-ppage-new-badge {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  color: #fff;
+  background: #c00;
+  padding: 1px 5px;
+  border: 1.5px solid #900;
+  text-transform: uppercase;
+  animation: flashPop .4s ease-out both;
+}
+/* DESC */
+.cow-desc {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+  background: #f5f5f5;
+  border-top: 3px solid #000;
+  line-height: 1.5;
+  min-height: 58px;
+}
+/* CONTROLS */
+.cow-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 3px solid #000;
+  background: #fff;
+}
+.cow-btn {
+  border: 3px solid #000;
+  background: #000;
+  color: #fff;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 14px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #555;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: transform .1s, box-shadow .1s;
+}
+.cow-btn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #555;
+}
+.cow-btn:disabled { background: #888; border-color: #888; cursor: default; box-shadow: none; }
+.cow-dot {
+  width: 14px; height: 14px;
+  border: 3px solid #000;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  transition: background .15s;
+  flex-shrink: 0;
+  margin: 0 2px;
+}
+.cow-dot-active { background: #000; }
+.cow-controls .cow-btn:first-child { margin-right: auto; }
+.cow-controls .cow-btn:last-child { margin-left: auto; }

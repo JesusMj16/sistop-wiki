@@ -36,6 +36,19 @@ export const COURSE: Course = {
           kind: 'sintesis',
           path: 'intro-procesos',
         },
+        {
+          id:'n2-2',
+          title: 'Control de Procesos',
+          kind: 'concepto',
+          path: 'control-procesos',
+        },
+        {
+          id:'n2-3',
+          title: 'Sistema de llamado para crear procesos',
+          kind: 'concepto',
+          path: 'systemcall-procesos',
+        },
+        
       ],
     },
   ],

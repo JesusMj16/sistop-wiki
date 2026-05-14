@@ -1,44 +1,48 @@
 .note { margin-bottom: 36px; }
 .note-card {
   position: relative;
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 0;
+  box-shadow: 10px 10px 0 #000;
   overflow: hidden;
+  font-family: "Arial", sans-serif;
 }
 
 .note-ribbon {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   position: absolute;
-  top: 18px; left: -1px;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 6px 14px 6px 16px;
-  font-size: 10.5px;
-  letter-spacing: .12em;
+  top: 18px; left: -4px;
+  background: #000;
+  color: #fff;
+  padding: 8px 18px 8px 18px;
+  font-size: 11px;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  font-weight: 600;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%);
-  font-family: var(--f-body);
+  font-weight: 900;
+  border: 3px solid #000;
+  border-left: 0;
+  box-shadow: 5px 5px 0 #000;
+  font-family: "Arial", sans-serif;
+  z-index: 2;
 }
-.note-ribbon svg { width: 12px; height: 12px; }
-.ribbon-concepto { background: oklch(0.42 0.16 240); }
-.ribbon-ejercicio { background: oklch(0.45 0.18 130); }
-.ribbon-referencia { background: oklch(0.48 0.14 65); }
-.ribbon-diagrama { background: oklch(0.42 0.18 290); }
-.ribbon-sintesis { background: oklch(0.45 0.16 20); }
+.note-ribbon svg { width: 14px; height: 14px; }
+.ribbon-concepto { background: #296fbb; }
+.ribbon-ejercicio { background: #2a9d3a; }
+.ribbon-referencia { background: #e07b00; }
+.ribbon-diagrama { background: #7a3fbf; }
+.ribbon-sintesis { background: #d11919; }
 
 .note-head {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  background-color: var(--accent);
+  background-color: #ffd84a;
   grid-template-rows: auto auto;
   gap: 10px 22px;
-  padding: 60px 30px 22px;
-  border-bottom: 1px dashed var(--rule-2);
+  padding: 70px 30px 26px;
+  border-bottom: 4px solid #000;
   align-items: center;
 }
 .note-counter {
@@ -50,32 +54,37 @@
   padding-top: 4px;
 }
 .counter-num {
-  font-size: 36px;
-  font-weight: 500;
-  color: var(--paper);
+  font-size: 42px;
+  font-weight: 900;
+  color: #000;
   letter-spacing: -.02em;
   font-feature-settings: "lnum";
+  background: #fff;
+  border: 3px solid #000;
+  padding: 4px 10px;
+  box-shadow: 4px 4px 0 #000;
 }
 .counter-of {
   font-size: 10px;
-  letter-spacing: .12em;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--paper);
-  font-family: var(--f-body);
-  margin-top: 2px;
-  font-weight: 500;
+  color: #000;
+  font-family: "Arial", sans-serif;
+  margin-top: 8px;
+  font-weight: 900;
 }
 .note-title {
   grid-column: 2;
-  color: var(--paper);
+  color: #000;
   grid-row: 1 / span 2;
-  font-family: var(--f-display);
-  font-size: 30px;
-  line-height: 1.12;
-  font-weight: 500;
+  font-family: "Arial", sans-serif;
+  font-size: 32px;
+  line-height: 1.05;
+  font-weight: 900;
   margin: 0;
   letter-spacing: -.02em;
   text-wrap: balance;
+  text-transform: uppercase;
 }
 .note-tools {
   grid-column: 3;
@@ -85,38 +94,52 @@
   gap: 8px;
 }
 .tool-btn {
-  appearance: none; border: 1px solid var(--rule);
-  background: var(--paper);
-  color: var(--ink-2);
-  width: 34px; height: 34px;
-  border-radius: 8px;
+  appearance: none; border: 3px solid #000;
+  background: #fff;
+  color: #000;
+  width: 38px; height: 38px;
+  border-radius: 0;
   display: grid; place-items: center;
   cursor: pointer;
-  transition: all .15s;
+  transition: transform .15s, box-shadow .15s;
+  box-shadow: 3px 3px 0 #000;
 }
-.tool-btn:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
-.tool-btn[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
-.tool-btn svg { width: 14px; height: 14px; }
+.tool-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #000; }
+.tool-btn:active { transform: translate(3px, 3px); box-shadow: none; }
+.tool-btn[aria-pressed="true"] { background: #000; color: #fff; }
+.tool-btn svg { width: 16px; height: 16px; }
 .tool-done {
   appearance: none;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  color: var(--ink-2);
-  font-family: inherit; font-size: 12px;
-  padding: 0 14px;
-  height: 34px;
-  border-radius: 8px;
+  border: 3px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: "Arial", sans-serif; font-size: 12px;
+  padding: 0 16px;
+  height: 38px;
+  border-radius: 0;
   cursor: pointer;
   display: inline-flex; align-items: center; gap: 8px;
-  transition: all .15s;
-  font-weight: 500;
+  transition: transform .15s, box-shadow .15s, background .15s;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  box-shadow: 3px 3px 0 #000;
 }
-.tool-done:hover { color: var(--ink); border-color: var(--ink-3); }
+.tool-done:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #000;
+  background: #296fbb;
+  color: #fff;
+}
+.tool-done:active { transform: translate(3px, 3px); box-shadow: none; }
 .tool-done.is-done {
-  background: var(--accent); color: var(--paper); border-color: transparent;
-  box-shadow: 0 2px 10px -2px var(--accent);
+  background: #000; color: #fff; border-color: #000;
 }
-.tool-done svg { width: 13px; height: 13px; }
+.tool-done.is-done:hover {
+  background: #2a9d3a;
+  border-color: #000;
+}
+.tool-done svg { width: 14px; height: 14px; }
 
 .note-body {
   padding: 36px 30px 18px;
@@ -124,11 +147,11 @@
   line-height: var(--line);
 }
 .note-body > * + * { margin-top: calc(var(--gap) * 1.4); }
-.note-body > .prose-p + .prose-p { margin-top: calc(var(--gap) * 1.1); }
-.note-body > .prose-title-h2 { margin-top: calc(var(--gap) * 2.4); }
-.note-body > .prose-title-h3 { margin-top: calc(var(--gap) * 2); }
-.note-body > .prose-title-h4 { margin-top: calc(var(--gap) * 1.6); }
-.note-body > .prose-title + * { margin-top: calc(var(--gap) * 0.9); }
+.note-body > .prose-p + .prose-p { margin-top: calc(var(--gap) * 0.4); }
+.note-body > .prose-title-h2 { margin-top: calc(var(--gap) * 0.4); }
+.note-body > .prose-title-h3 { margin-top: calc(var(--gap) * 0.4); }
+.note-body > .prose-title-h4 { margin-top: calc(var(--gap) * 0.4); }
+.note-body > .prose-title + * { margin-top: calc(var(--gap) * 0.4); }
 .note-body > .callout,
 .note-body > .prose-quote,
 .note-body > .prose-table-wrap,
@@ -153,32 +176,39 @@
 }
 
 .note-foot {
-  padding: 14px 30px 22px;
-  border-top: 1px dashed var(--rule-2);
+  padding: 18px 30px 26px;
+  border-top: 4px solid #000;
+  background: #fff;
 }
 .own-prompt {
-  appearance: none; border: 0;
-  background: var(--paper-2);
+  appearance: none;
+  background: #fff;
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 10px;
-  display: flex; align-items: center; gap: 10px;
-  font-family: inherit; font-size: 13px;
-  color: var(--ink-2);
+  padding: 14px 18px;
+  border-radius: 0;
+  display: flex; align-items: center; gap: 12px;
+  font-family: "Arial", sans-serif; font-size: 13px;
+  color: #000;
   cursor: pointer;
-  border: 1px dashed var(--rule-2);
-  transition: all .2s;
+  border: 3px solid #000;
+  transition: transform .2s, box-shadow .2s, background .2s, color .2s;
   text-align: left;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: .06em;
+  box-shadow: 5px 5px 0 #000;
 }
 .own-prompt:hover {
-  border-color: var(--accent);
-  background: var(--accent-softer);
-  color: var(--accent-ink);
+  background: #296fbb;
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000;
 }
+.own-prompt:active { transform: translate(5px, 5px); box-shadow: none; }
 .own-prompt > span { flex: 1; }
-.own-prompt > svg:first-child { width: 14px; height: 14px; color: var(--accent); }
-.own-prompt > svg:last-child { width: 14px; height: 14px; opacity: .5; transition: transform .2s; }
-.own-prompt:hover > svg:last-child { transform: translateX(3px); opacity: 1; }
+.own-prompt > svg:first-child { width: 16px; height: 16px; }
+.own-prompt > svg:last-child { width: 16px; height: 16px; transition: transform .2s; }
+.own-prompt:hover > svg:last-child { transform: translateX(4px); }
 
 @media (max-width: 880px) {
   .note-head { padding: 60px 20px 20px; gap: 8px 16px; }

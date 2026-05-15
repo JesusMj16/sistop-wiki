@@ -15,6 +15,7 @@ import Prevencion from './pages/notes/Prevencion';
 import Banquero from './pages/notes/Banquero';
 import Deteccion from './pages/notes/Deteccion';
 import Prediccion from './pages/notes/Prediccion';
+import MemoriaIntro from './pages/notes/MemoriaIntro';
 import IntroIPC from './pages/notes/IntroIPC';
 import Pipes from './pages/notes/Pipes';
 import Fifos from './pages/notes/Fifos';
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
           { path: 'interbloqueo/banquero', Component: Banquero },
           { path: 'interbloqueo/deteccion', Component: Deteccion },
           { path: 'interbloqueo/prediccion', Component: Prediccion },
+          { path: 'memoria/intro', Component: MemoriaIntro },
           { path: 'ipc/intro-ipc', Component: IntroIPC },
           { path: 'ipc/pipes', Component: Pipes },
           { path: 'ipc/fifos', Component: Fifos },

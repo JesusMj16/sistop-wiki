@@ -10,6 +10,7 @@ export { ZombieFlow } from './ZombieFlow';
 export { ThreadsFlow } from './ThreadsFlow';
 export { CircularWait } from './CircularWait';
 export { LinearOrdering } from './LinearOrdering';
+export { MemoryLayout } from './MemoryLayout';
 
 export type CalloutTone = 'idea' | 'warn' | 'info' | 'success' | 'danger';
 

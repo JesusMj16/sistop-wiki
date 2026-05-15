@@ -1,21 +1,13 @@
 import { useState } from 'react';
 import { useTweaksCtx } from '../../context/TweaksContext';
 import type { Tweaks } from '../../hooks/useTweaks';
+import { PALETTES } from '../../hooks/palettes';
 import './TweaksPanel.css';
 
-const PALETTES: Array<[string, string, string]> = [
-  ['#c2603a', '#1f1d1a', '#f6f1e8'],
-  ['#3a6a4f', '#1d201d', '#eef2ea'],
-  ['#3b5fa3', '#13192a', '#eef1f7'],
-  ['#7a4ca8', '#1c1a23', '#f1edf6'],
-  ['#a8804b', '#221c14', '#f3ece1'],
-];
-
-const FONT_PAIRS: Array<{ value: Tweaks['fontPair']; label: string }> = [
-  { value: 'serif-classic', label: 'Clásica' },
-  { value: 'humanist', label: 'Humanista' },
-  { value: 'modern-sans', label: 'Moderna' },
-  { value: 'editorial', label: 'Editorial' },
+/** Each option previews itself: `fontFamily` on the <option> renders the label
+ *  in the font that will be applied. */
+const FONT_PAIRS: Array<{ value: Tweaks['fontPair']; label: string; preview: string }> = [
+  { value: 'fraunces',      label: 'Fraunces editorial',     preview: "'Fraunces', Georgia, serif" },
 ];
 
 const DENSITIES: Array<Tweaks['density']> = ['compact', 'regular', 'comfy'];
@@ -58,15 +50,24 @@ export default function TweaksPanel() {
           <div className="twk-row">
             <div className="twk-label">Paleta</div>
             <div className="twk-chips" role="radiogroup">
-              {PALETTES.map((p, i) => (
+              {PALETTES.map((p) => (
                 <button
-                  key={i}
+                  key={p.id}
                   className="twk-chip"
                   role="radio"
-                  aria-checked={p.join(',') === tweaks.palette.join(',')}
-                  style={{ background: `linear-gradient(90deg, ${p[0]} 0 60%, ${p[1]} 60% 80%, ${p[2]} 80% 100%)` }}
-                  onClick={() => setTweak('palette', p)}
-                  title={p.join(', ')}
+                  aria-checked={p.id === tweaks.paletteId}
+                  aria-label={p.label}
+                  style={{
+                    background:
+                      `linear-gradient(90deg,` +
+                      ` ${p.accent} 0 40%,` +
+                      ` ${p.hiAmber} 40% 55%,` +
+                      ` ${p.hiCobalt} 55% 70%,` +
+                      ` ${p.hiGrape} 70% 85%,` +
+                      ` ${p.paper} 85% 100%)`,
+                  }}
+                  onClick={() => setTweak('paletteId', p.id)}
+                  title={p.label}
                 />
               ))}
             </div>
@@ -82,7 +83,13 @@ export default function TweaksPanel() {
               onChange={(e) => setTweak('fontPair', e.target.value as Tweaks['fontPair'])}
             >
               {FONT_PAIRS.map(o => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+                <option
+                  key={o.value}
+                  value={o.value}
+                  style={{ fontFamily: o.preview }}
+                >
+                  {o.label}
+                </option>
               ))}
             </select>
           </div>
@@ -94,8 +101,8 @@ export default function TweaksPanel() {
             <input
               className="twk-slider"
               type="range"
-              min={14}
-              max={22}
+              min={15}
+              max={24}
               value={tweaks.fontSize}
               onChange={(e) => setTweak('fontSize', Number(e.target.value))}
             />

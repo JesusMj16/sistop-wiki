@@ -6,7 +6,10 @@
   border-radius: 0;
   box-shadow: 10px 10px 0 #000;
   overflow: hidden;
-  font-family: "Arial", sans-serif;
+  /* Body text inside the card → display font (same as "05" counter chip).
+     Titles, ribbons and tool buttons re-declare Arial below, so the brutalist
+     headline language stays intact. */
+  font-family: var(--f-display);
 }
 
 .note-ribbon {
@@ -29,16 +32,16 @@
   z-index: 2;
 }
 .note-ribbon svg { width: 14px; height: 14px; }
-.ribbon-concepto { background: #296fbb; }
-.ribbon-ejercicio { background: #2a9d3a; }
-.ribbon-referencia { background: #e07b00; }
-.ribbon-diagrama { background: #7a3fbf; }
-.ribbon-sintesis { background: #d11919; }
+.ribbon-concepto   { background: var(--hi-cobalt); }
+.ribbon-ejercicio  { background: var(--hi-emerald); }
+.ribbon-referencia { background: var(--hi-amber); color: var(--hi-amber-ink); }
+.ribbon-diagrama   { background: var(--hi-grape); }
+.ribbon-sintesis   { background: var(--hi-rose); }
 
 .note-head {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  background-color: #ffd84a;
+  background-color: var(--hi-amber);
   grid-template-rows: auto auto;
   gap: 10px 22px;
   padding: 70px 30px 26px;
@@ -77,7 +80,7 @@
   grid-column: 2;
   color: #000;
   grid-row: 1 / span 2;
-  font-family: "Arial", sans-serif;
+  font-family: var(--f-display);
   font-size: 32px;
   line-height: 1.05;
   font-weight: 900;
@@ -128,15 +131,16 @@
 .tool-done:hover {
   transform: translate(-2px, -2px);
   box-shadow: 5px 5px 0 #000;
-  background: #296fbb;
-  color: #fff;
+  background: var(--accent);
+  color: var(--paper);
 }
 .tool-done:active { transform: translate(3px, 3px); box-shadow: none; }
 .tool-done.is-done {
   background: #000; color: #fff; border-color: #000;
 }
 .tool-done.is-done:hover {
-  background: #2a9d3a;
+  background: var(--hi-emerald);
+  color: var(--paper);
   border-color: #000;
 }
 .tool-done svg { width: 14px; height: 14px; }
@@ -238,8 +242,8 @@
   box-shadow: 5px 5px 0 #000;
 }
 .own-prompt:hover {
-  background: #296fbb;
-  color: #fff;
+  background: var(--accent);
+  color: var(--paper);
   transform: translate(-2px, -2px);
   box-shadow: 7px 7px 0 #000;
 }

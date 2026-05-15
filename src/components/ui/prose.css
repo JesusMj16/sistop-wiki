@@ -1,12 +1,16 @@
 .prose-p {
   color: var(--ink);
-  font-family: "Arial", sans-serif;
-  font-weight: 600;
+  /* Paragraphs use the display font (same family as the "05" counter chip)
+     for a chunkier, more characterful read. Slightly larger than the slider
+     baseline because display faces read smaller than equivalent sans. */
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: calc(var(--reader-fs) * 1.3);
   line-height: 1.55;
 }
 
 .prose-title {
-  font-family: "Arial", sans-serif;
+  font-family: var(--f-display);
   color: #000;
   margin: 0;
   letter-spacing: -.01em;
@@ -27,22 +31,21 @@
   width: 8px;
   background: #000;
 }
-.prose-title em { color: #000; font-style: italic; background: #ffd84a; padding: 0 4px; }
-.prose-title-h2 { font-size: calc(var(--reader-fs) * 1.55); line-height: 1.2; background: #ffd84a; }
-.prose-title-h3 { font-size: calc(var(--reader-fs) * 1.25); line-height: 1.25; background: var(--accent); color: #fff; }
+.prose-title em { color: var(--hi-amber-ink); font-style: italic; background: var(--hi-amber); padding: 0 4px; }
+.prose-title-h2 { font-size: calc(var(--reader-fs) * 1.55); line-height: 1.2; background: var(--hi-amber); color: var(--hi-amber-ink); }
+.prose-title-h3 { font-size: calc(var(--reader-fs) * 1.25); line-height: 1.25; background: var(--accent); color: var(--paper); }
 .prose-title-h4 {
   font-size: calc(var(--reader-fs) * 1.05);
   line-height: 1.3;
   letter-spacing: .08em;
   font-weight: 900;
-  color: #000;
-  background: #296fbb;
-  color: #fff;
+  background: var(--hi-cobalt);
+  color: var(--paper);
 }
 .prose-p em { color: var(--accent-ink); font-style: italic; font-weight: 500; }
 .prose-p strong { color: var(--ink); font-weight: 600; background: linear-gradient(to top, var(--accent-soft) 30%, transparent 30%); padding: 0 2px; }
 
-.prose-list { margin: 0; padding: 0; list-style: none; }
+.prose-list { margin: 0; padding: 0; list-style: none; font-size: calc(var(--reader-fs)*1.2); }
 .prose-list > li {
   position: relative;
   padding: 8px 12px 8px 32px;
@@ -67,7 +70,7 @@
   transform: translateY(-50%);
 }
 .prose-list > li:last-child { margin-bottom: 0; }
-.prose-list em { color: #000; font-style: italic; background: #ffd84a; padding: 0 4px; }
+.prose-list em { color: var(--hi-amber-ink); font-style: italic; background: var(--hi-amber); padding: 0 4px; }
 .prose-list strong { color: #000; font-weight: 900; }
 
 .quote-card-wrap {
@@ -75,11 +78,18 @@
   margin: 20px 0;
 }
 
+/* Callout system — every variant derives all four roles (fill / heading-ink /
+   body-ink / decorative-icon) from ONE palette token via color-mix. Swapping
+   palettes propagates through the whole stack with zero rule changes. */
 .quote-card {
   width: 100%;
   min-height: 110px;
-  background: rgb(183, 226, 25);
-  font-family: "Arial", sans-serif;
+  /* Default (quote) uses the palette's special / grape slot. */
+  --cl: var(--hi-grape);
+  background: color-mix(in oklab, var(--cl) 78%, var(--paper));
+  /* Callout body uses the display font for a chunky editorial read.
+     The uppercase NAME label below keeps its own Arial for the tag look. */
+  font-family: var(--f-display);
   position: relative;
   border-radius: 0;
   border: 4px solid #000;
@@ -97,13 +107,13 @@
   z-index: 2;
   text-transform: uppercase;
   font-weight: 700;
-  color: rgb(127, 155, 29);
+  color: color-mix(in oklab, var(--cl) 60%, var(--ink));
   padding: 16px 20px 0;
   line-height: 1.2;
 }
 
 .quote-mark-svg {
-  color: rgb(223, 248, 134);
+  color: color-mix(in oklab, var(--cl) 30%, var(--paper));
   position: absolute;
   top: -30px;
   right: -30px;
@@ -111,14 +121,9 @@
   opacity: 0.85;
   z-index: 0;
 }
-.quote-mark-svg svg {
-  width: 180px;
-  height: 180px;
-}
-.callout-ic-svg svg {
-  width: 180px;
-  height: 180px;
-}
+.quote-mark-svg svg { width: 180px; height: 180px; }
+.callout-ic-svg svg { width: 180px; height: 180px; }
+.callout-ic-svg { color: color-mix(in oklab, var(--cl) 30%, var(--paper)); }
 
 .quote-body-text {
   position: relative;
@@ -126,7 +131,7 @@
   font-size: 18px;
   font-weight: 900;
   padding: 8px 20px 12px;
-  color: #465512;
+  color: color-mix(in oklab, var(--cl) 30%, var(--ink));
   line-height: 1.3;
 }
 
@@ -134,72 +139,19 @@
   position: relative;
   z-index: 2;
   font-weight: 700;
-  color: rgb(127, 155, 29);
+  color: color-mix(in oklab, var(--cl) 60%, var(--ink));
   padding: 0 20px 12px;
   margin-top: 4px;
   opacity: 0;
   transition: 0.5s;
 }
+.quote-card:hover .quote-author { opacity: 1; }
 
-.quote-card:hover .quote-author {
-  opacity: 1;
-}
-
-.callout-card-warn {
-  background: rgb(255, 170, 60);
-}
-.callout-card-warn .quote-card-name,
-.callout-card-warn .quote-author {
-  color: rgb(155, 90, 10);
-}
-.callout-card-warn .callout-ic-svg {
-  color: rgb(255, 220, 160);
-}
-.callout-card-warn .quote-body-text {
-  color: #553010;
-}
-
-.callout-card-info {
-  background: rgb(80, 170, 240);
-}
-.callout-card-info .quote-card-name,
-.callout-card-info .quote-author {
-  color: rgb(20, 80, 130);
-}
-.callout-card-info .callout-ic-svg {
-  color: rgb(190, 225, 250);
-}
-.callout-card-info .quote-body-text {
-  color: #0f3550;
-}
-
-.callout-card-success {
-  background: rgb(100, 200, 130);
-}
-.callout-card-success .quote-card-name,
-.callout-card-success .quote-author {
-  color: rgb(30, 95, 50);
-}
-.callout-card-success .callout-ic-svg {
-  color: rgb(200, 240, 210);
-}
-.callout-card-success .quote-body-text {
-  color: #133d22;
-}
-
-.callout-card-danger {
-  background: rgb(240, 95, 95);
-}
-.callout-card-danger .quote-card-name,
-.callout-card-danger .quote-author {
-  color: rgb(130, 25, 25);
-}
-.callout-card-danger .callout-ic-svg {
-  color: rgb(250, 200, 200);
-}
-.callout-card-danger .quote-body-text {
-  color: #4d1010;
-}
+/* Semantic variants — only override the source hue. Mixing logic stays above. */
+.callout-card-warn    { --cl: var(--hi-amber); }
+.callout-card-info    { --cl: var(--hi-cobalt); }
+.callout-card-success { --cl: var(--hi-emerald); }
+.callout-card-danger  { --cl: var(--hi-rose); }
 
 .prose-table-wrap {
   overflow-x: auto;
@@ -653,7 +605,8 @@
   top: 320px;
   left: calc(50% + 70px);
   animation-delay: 1.7s;
-  background: #ffd84a;
+  background: var(--hi-amber);
+  color: var(--hi-amber-ink);
 }
 .fork-child-new { position: relative; }
 .fork-pos-right::after {
@@ -803,15 +756,16 @@
    COW ANIMATION, neo brutalist comic edition
    ══════════════════════════════════════════════ */
 .cow-wrap {
-  --cow-yellow: #ffd84a;
-  --cow-yellow-deep: #ffb800;
-  --cow-blue: #1a6fcc;
-  --cow-blue-soft: #6ab0ff;
-  --cow-amber: #b8900a;
-  --cow-red: #c0182d;
+  /* Palette-driven — every accent maps to a semantic slot on the active palette. */
+  --cow-yellow:      var(--hi-amber);
+  --cow-yellow-deep: color-mix(in oklab, var(--hi-amber) 78%, var(--ink));
+  --cow-blue:        var(--hi-cobalt);
+  --cow-blue-soft:   color-mix(in oklab, var(--hi-cobalt) 55%, var(--paper));
+  --cow-amber:       color-mix(in oklab, var(--hi-amber) 60%, var(--ink));
+  --cow-red:         var(--hi-rose);
   --cow-ink: #0a0a0a;
-  --cow-paper: #fffaf0;
-  --cow-paper-2: #f3ecd9;
+  --cow-paper:   var(--paper);
+  --cow-paper-2: color-mix(in oklab, var(--paper) 92%, var(--ink));
   --cow-ram-bg: #0f1024;
   --cow-ram-tile: #1c1e3a;
   --cow-ram-tile-2: #262947;
@@ -1423,12 +1377,12 @@
    PROCESS FAN ANIMATION
    ======================== */
 .fan-wrap {
-  --fan-ink: #0d0d0d;
-  --fan-paper: #fff8ec;
-  --fan-accent: #ff5a3c;
-  --fan-yellow: #ffd84a;
-  --fan-blue: #2667ff;
-  --fan-green: #1f9d55;
+  --fan-ink:    var(--ink);
+  --fan-paper:  var(--paper);
+  --fan-accent: var(--accent);
+  --fan-yellow: var(--hi-amber);
+  --fan-blue:   var(--hi-cobalt);
+  --fan-green:  var(--hi-emerald);
   margin: 36px 0;
   background: var(--fan-paper);
   border: 4px solid var(--fan-ink);
@@ -1813,13 +1767,13 @@
    WAIT TIMELINE
    ======================== */
 .wt-wrap {
-  --wt-ink: #0d0d0d;
-  --wt-paper: #f3f0e8;
-  --wt-blue: #2667ff;
-  --wt-yellow: #ffd84a;
-  --wt-red: #e63946;
-  --wt-green: #1f9d55;
-  --wt-purple: #7b3ff2;
+  --wt-ink:    var(--ink);
+  --wt-paper:  var(--paper);
+  --wt-blue:   var(--hi-cobalt);
+  --wt-yellow: var(--hi-amber);
+  --wt-red:    var(--hi-rose);
+  --wt-green:  var(--hi-emerald);
+  --wt-purple: var(--hi-grape);
   margin: 36px 0;
   background: var(--wt-paper);
   border: 4px solid var(--wt-ink);
@@ -2186,23 +2140,32 @@
    WAITPID MATRIX
    ======================== */
 .wpm-wrap {
-  --wpm-ink: #0d0d0d;
-  --wpm-paper: #fffaf0;
-  --wpm-blue: #2667ff;
-  --wpm-yellow: #ffd84a;
-  --wpm-red: #e63946;
-  --wpm-green: #1f9d55;
+  --wpm-ink:    var(--ink);
+  --wpm-paper:  var(--paper);
+  --wpm-blue:   var(--hi-cobalt);
+  --wpm-yellow: var(--hi-amber);
+  --wpm-red:    var(--hi-rose);
+  --wpm-green:  var(--hi-emerald);
+
+  /* Vertical rhythm token — every block below uses multiples of this so the
+     panel reads as a single composition instead of stacked rectangles. */
+  --wpm-rhythm: 18px;
+
   margin: 36px 0;
   background: var(--wpm-paper);
   border: 4px solid var(--wpm-ink);
   box-shadow: 12px 12px 0 var(--wpm-ink);
-  padding: 22px 22px 18px;
+  /* Extra top padding so the `INTERACTIVO · waitpid()` corner tag has air. */
+  padding: 32px 24px 24px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wpm-rhythm);
 }
 .wpm-wrap::before {
   content: "INTERACTIVO · waitpid()";
   position: absolute;
-  top: 6px; left: 12px;
+  top: 10px; left: 16px;
   font-family: "Arial", sans-serif;
   font-size: 10px;
   font-weight: 900;
@@ -2210,9 +2173,10 @@
   color: var(--wpm-ink);
   opacity: .55;
 }
+
 .wpm-intro {
-  margin: 18px 0 14px;
-  padding: 12px 14px;
+  margin: 0;
+  padding: 16px 18px;
   background: #fff;
   border: 3px solid var(--wpm-ink);
   box-shadow: 5px 5px 0 var(--wpm-ink);
@@ -2225,32 +2189,33 @@
   font-size: 10px;
   font-weight: 900;
   letter-spacing: .2em;
-  padding: 3px 8px;
-  margin-bottom: 8px;
+  padding: 4px 9px;
+  margin-bottom: 12px;
 }
 .wpm-intro-text {
   margin: 0;
-  font-family: "Arial", sans-serif;
-  font-size: 14px;
-  line-height: 1.55;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.95);
+  line-height: 1.6;
   color: var(--wpm-ink);
 }
 .wpm-intro-text strong { font-weight: 900; }
+
 .wpm-modes {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 14px;
+  margin: 0;
 }
 .wpm-mode-btn {
   background: #fff;
   border: 3px solid var(--wpm-ink);
   cursor: pointer;
-  padding: 10px 8px;
+  padding: 14px 12px;
   font-family: "Arial", sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   text-align: left;
   box-shadow: 4px 4px 0 var(--wpm-ink);
   transition: transform .15s, box-shadow .15s, background .15s;
@@ -2266,7 +2231,7 @@
 }
 .wpm-mode-arg {
   font-family: "Space Mono", monospace;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
 }
 .wpm-mode-name {
@@ -2275,25 +2240,26 @@
   letter-spacing: .04em;
   opacity: .85;
 }
+
 .wpm-call {
   background: var(--wpm-ink);
   color: var(--wpm-yellow);
   border: 3px solid var(--wpm-ink);
-  padding: 12px 14px;
+  padding: 14px 16px;
   font-family: "Space Mono", monospace;
   font-size: 16px;
-  margin-bottom: 12px;
+  margin: 0;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
   box-shadow: 5px 5px 0 var(--wpm-red);
 }
 .wpm-call-prefix { color: #fff; font-weight: 900; }
 .wpm-call-sep { color: #aaa; }
 .wpm-call-arg {
   background: rgba(255,255,255,0.1);
-  padding: 2px 6px;
+  padding: 3px 8px;
   font-weight: 700;
 }
 .wpm-call-arg-pid { background: var(--wpm-yellow); color: var(--wpm-ink); }
@@ -2303,58 +2269,65 @@
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
   font-size: 11px;
   color: #fff;
   background: rgba(255,255,255,0.1);
-  padding: 4px 8px;
+  padding: 5px 10px;
   border: 2px solid #fff;
 }
 .wpm-toggle input { accent-color: var(--wpm-green); }
+
 .wpm-explain {
   background: #fff;
   border: 3px solid var(--wpm-ink);
   box-shadow: 5px 5px 0 var(--wpm-ink);
-  padding: 12px 14px;
-  margin-bottom: 14px;
+  padding: 16px 18px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .wpm-explain-text {
-  margin: 0 0 8px;
-  font-family: "Arial", sans-serif;
-  font-size: 13.5px;
-  line-height: 1.55;
+  margin: 0;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.95);
+  line-height: 1.6;
   color: var(--wpm-ink);
 }
 .wpm-explain-match {
   margin: 0;
-  font-family: "Arial", sans-serif;
-  font-size: 12px;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.85);
   color: var(--wpm-ink);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 .wpm-explain-tag {
   display: inline-block;
   background: var(--wpm-ink);
   color: var(--wpm-yellow);
+  font-family: "Arial", sans-serif;
   font-size: 9px;
   font-weight: 900;
   letter-spacing: .18em;
-  padding: 3px 7px;
+  padding: 4px 8px;
 }
+
 .wpm-children {
   background: #fff;
   border: 3px solid var(--wpm-ink);
   box-shadow: 5px 5px 0 var(--wpm-ink);
-  padding: 18px 12px 12px;
+  /* Top padding clears the corner tag; bottom matches outer rhythm. */
+  padding: 26px 16px 16px;
   position: relative;
-  margin-bottom: 14px;
+  margin: 0;
 }
 .wpm-children-tag {
   position: absolute;
-  top: 4px; left: 8px;
+  top: 8px; left: 12px;
   font-family: "Arial", sans-serif;
   font-size: 9px;
   font-weight: 900;
@@ -2365,13 +2338,16 @@
 .wpm-children-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 14px;
 }
 .wpm-child {
   border: 3px solid var(--wpm-ink);
-  padding: 10px;
+  padding: 14px 14px 12px;
   position: relative;
-  font-family: "Arial", sans-serif;
+  font-family: var(--f-display);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   transition: transform .25s, background .25s, box-shadow .25s;
 }
 .wpm-child-hit {
@@ -2389,7 +2365,8 @@
 .wpm-child-head {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 6px;
+  align-items: center;
+  margin: 0;
 }
 .wpm-child-pid {
   font-family: "Space Mono", monospace;
@@ -2397,7 +2374,7 @@
   font-weight: 900;
   background: var(--wpm-ink);
   color: var(--wpm-yellow);
-  padding: 2px 6px;
+  padding: 3px 8px;
 }
 .wpm-child-pgid {
   font-family: "Space Mono", monospace;
@@ -2405,28 +2382,33 @@
   font-weight: 700;
   background: #fff;
   color: var(--wpm-ink);
-  padding: 2px 6px;
+  padding: 3px 8px;
   border: 2px solid var(--wpm-ink);
 }
 .wpm-child-hit .wpm-child-pgid { background: var(--wpm-yellow); }
 .wpm-child-label {
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.85);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
 }
 .wpm-child-flag {
+  font-family: "Arial", sans-serif;
   font-size: 10px;
   font-weight: 900;
   letter-spacing: .14em;
+  margin: 0;
 }
+
 .wpm-result {
   background: var(--wpm-ink);
   color: #fff;
-  padding: 12px 14px;
+  padding: 16px 18px;
   border: 3px solid var(--wpm-ink);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   box-shadow: 5px 5px 0 var(--wpm-red);
 }
 .wpm-result-tag {
@@ -2438,12 +2420,13 @@
 }
 .wpm-result-text {
   font-family: "Space Mono", monospace;
-  font-size: 12.5px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.65;
 }
 @media (max-width: 760px) {
-  .wpm-modes { grid-template-columns: repeat(2, 1fr); }
-  .wpm-children-grid { grid-template-columns: 1fr; }
+  .wpm-wrap { padding: 32px 16px 18px; gap: 14px; }
+  .wpm-modes { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .wpm-children-grid { grid-template-columns: 1fr; gap: 10px; }
   .wpm-call { font-size: 13px; }
 }
 

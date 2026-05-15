@@ -51,25 +51,26 @@
 
 
 
-[data-fontpair='serif-classic'] {
-  --f-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-  --f-body:    'Inter', system-ui, sans-serif;
+/* Three cartoon-leaning display fonts. Selecting one in TweaksPanel swaps
+   --f-display, which drives prose paragraphs (.prose-p uses var(--f-display)).
+   --f-body stays Arial-ish for tags/ribbons; --f-mono unchanged for code. */
+[data-fontpair='fraunces'] {
+  /* Chunky serif with soft swells. Editorial cartoon. */
+  --f-display: 'Fraunces', Georgia, serif;
+  --f-body:    'Arial', system-ui, sans-serif;
   --f-mono:    'JetBrains Mono', ui-monospace, monospace;
 }
-[data-fontpair='humanist'] {
-  --f-display: 'Lora', Georgia, serif;
-  --f-body:    'Geist', 'Inter', system-ui, sans-serif;
-  --f-mono:    'JetBrains Mono', monospace;
+[data-fontpair='chewy'] {
+  /* Rounded chunky display. Strong comic-panel personality. */
+  --f-display: 'Chewy', 'Fraunces', Georgia, serif;
+  --f-body:    'Arial', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', ui-monospace, monospace;
 }
-[data-fontpair='modern-sans'] {
-  --f-display: 'Geist', 'Inter', system-ui, sans-serif;
-  --f-body:    'Geist', system-ui, sans-serif;
-  --f-mono:    'Geist Mono', ui-monospace, monospace;
-}
-[data-fontpair='editorial'] {
-  --f-display: 'DM Serif Display', Georgia, serif;
-  --f-body:    'IBM Plex Sans', system-ui, sans-serif;
-  --f-mono:    'IBM Plex Mono', monospace;
+[data-fontpair='patrick-hand'] {
+  /* Handwritten cartoon. Reads like comic-strip captions. */
+  --f-display: 'Patrick Hand', 'Fraunces', cursive;
+  --f-body:    'Arial', system-ui, sans-serif;
+  --f-mono:    'JetBrains Mono', ui-monospace, monospace;
 }
 
 [data-density='compact']  { --gap: 14px; --pad: 18px; --line: 1.55; }

@@ -1,5 +1,4 @@
 .prose-p {
-  margin-top: 10px;
   color: var(--ink);
   font-family: "Arial", sans-serif;
   font-weight: 600;
@@ -2449,3 +2448,5 @@
   .wpm-children-grid { grid-template-columns: 1fr; }
   .wpm-call { font-size: 13px; }
 }
+
+

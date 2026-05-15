@@ -146,24 +146,63 @@
   padding: 36px 30px 18px;
   font-size: var(--reader-fs);
   line-height: var(--line);
+  /* Unified rhythm scale — every gap derives from --gap so density toggle
+     stays coherent. Avoids stacked margins from per-component `margin: Npx 0`. */
+  --rhythm:        var(--gap);                  /* default sibling spacing */
+  --rhythm-tight:  calc(var(--gap) * 0.55);     /* heading → its content   */
+  --rhythm-section:calc(var(--gap) * 1.5);      /* before a new heading    */
+  --rhythm-block:  calc(var(--gap) * 1.25);     /* before/after big blocks */
 }
-.note-body > * + * { margin-top: calc(var(--gap) * 1.4); }
-.note-body > .prose-p + .prose-p { margin-top: calc(var(--gap) * 0.4); }
-.note-body > .prose-title-h2 { margin-top: calc(var(--gap) * 0.4); }
-.note-body > .prose-title-h3 { margin-top: calc(var(--gap) * 0.4); }
-.note-body > .prose-title-h4 { margin-top: calc(var(--gap) * 0.4); }
-.note-body > .prose-title + * { margin-top: calc(var(--gap) * 0.4); }
-.note-body > .callout,
-.note-body > .prose-quote,
+
+/* Zero out own margins of direct children so a single rule governs rhythm.
+   Components keep their internal padding/borders untouched. */
+.note-body > * { margin: 0; }
+
+/* Default rhythm between any two siblings */
+.note-body > * + * { margin-top: var(--rhythm); }
+.note-body > *:first-child { margin-top: 0; }
+
+/* Tight bond: heading clings to the content right below it */
+.note-body > .prose-title + *,
+.note-body > .prose-title-h2 + *,
+.note-body > .prose-title-h3 + *,
+.note-body > .prose-title-h4 + * { margin-top: var(--rhythm-tight); }
+
+/* New section: extra breathing before a heading (except at the very top) */
+.note-body > * + .prose-title,
+.note-body > * + .prose-title-h2,
+.note-body > * + .prose-title-h3,
+.note-body > * + .prose-title-h4 { margin-top: var(--rhythm-section); }
+
+/* Heavy visual blocks: callouts, tables, animated panels, code cards — extra
+   air on both sides so they read as standalone units, not part of body text. */
+.note-body > .quote-card-wrap,
 .note-body > .prose-table-wrap,
 .note-body > .thinkers,
-.note-body > .diagram { margin-top: calc(var(--gap) * 1.7); }
-.note-body > .callout + *,
-.note-body > .prose-quote + *,
+.note-body > .diagram,
+.note-body > .card-wrap,
+.note-body > .proc-fan,
+.note-body > .fork-tree,
+.note-body > .fan-wrap,
+.note-body > .wt-wrap,
+.note-body > .wpm-wrap,
+.note-body > .cow-wrap,
+.note-body > .code-explain { margin-top: var(--rhythm-block); }
+.note-body > .quote-card-wrap + *,
 .note-body > .prose-table-wrap + *,
 .note-body > .thinkers + *,
-.note-body > .diagram + * { margin-top: calc(var(--gap) * 1.7); }
-.note-body > *:first-child { margin-top: 0; }
+.note-body > .diagram + *,
+.note-body > .card-wrap + *,
+.note-body > .proc-fan + *,
+.note-body > .fork-tree + *,
+.note-body > .fan-wrap + *,
+.note-body > .wt-wrap + *,
+.note-body > .wpm-wrap + *,
+.note-body > .cow-wrap + *,
+.note-body > .code-explain + * { margin-top: var(--rhythm-block); }
+
+/* Paragraph runs stay compact — feels like prose, not isolated blocks. */
+.note-body > .prose-p + .prose-p { margin-top: calc(var(--rhythm) * 0.55); }
 
 .note-body > .prose-p:first-child::first-letter {
   font-family: var(--f-display);
@@ -216,3 +255,5 @@
   .note-title { font-size: 24px; }
   .note-body, .note-foot { padding-left: 20px; padding-right: 20px; }
 }
+
+

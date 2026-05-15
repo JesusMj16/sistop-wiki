@@ -43,6 +43,22 @@
   --bx-muted: #888;          /* muted placeholder text */
   --bx-highlight: #ffd84a;   /* yellow callout/header surface */
   --bx-highlight-on: #000;   /* text on yellow highlight */
+
+  /* Legacy aliases (kept for incremental migration). Map to --bx-* tokens
+     so they follow the same dark-mode flip. */
+  --paper-card:   var(--bx-surface);
+  --paper-card-2: #fafafa;
+  --paper-card-3: #f3eee3;
+  --frame:        var(--bx-border);
+  --frame-soft:   #1f1d1a;
+  --stamp:        var(--bx-fill);
+  --shadow-stamp: var(--bx-shadow);
+  --hi-amber:     var(--bx-highlight);
+  --hi-amber-ink: var(--bx-highlight-on);
+  --hi-cobalt:    #296fbb;
+  --hi-emerald:   #2a9d3a;
+  --hi-rose:      #d11919;
+  --hi-grape:     #7a3fbf;
 }
 
 [data-theme='dark'] {
@@ -65,6 +81,10 @@
   --bx-muted: #807a70;
   --bx-highlight: #3d3520;
   --bx-highlight-on: #d4c896;
+
+  --paper-card-2: #25221c;
+  --paper-card-3: #2a2620;
+  --frame-soft:   #e8e3d8;
 }
 
 [data-fontpair='serif-classic'] {

@@ -16,7 +16,7 @@ function Shell() {
     <div className={cls.join(' ')}>
       <SideBar />
       <Outlet />
-      {import.meta.env.DEV && <TweaksPanel />}
+      <TweaksPanel />
     </div>
   );
 }

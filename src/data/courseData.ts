@@ -103,6 +103,40 @@ export const COURSE: Course = {
         },
       ],
     },
+    {
+      id: 's4',
+      number: '04',
+      title: 'Proyecto Minishell',
+      summary: 'Construcción de una shell minimalista en C que integra las llamadas al sistema vistas en el curso',
+      duration: '',
+      path: 'proyecto-minishell',
+      notes: [
+        {
+          id: 'n4-1',
+          title: '4.0 Introducción al proyecto',
+          kind: 'sintesis',
+          path: 'intro',
+        },
+        {
+          id: 'n4-2',
+          title: '4.1 Arquitectura: el bucle REPL',
+          kind: 'concepto',
+          path: 'arquitectura',
+        },
+        {
+          id: 'n4-3',
+          title: '4.2 Comandos del sistema de archivos',
+          kind: 'concepto',
+          path: 'comandos-fs',
+        },
+        {
+          id: 'n4-4',
+          title: '4.3 Comandos de información del sistema',
+          kind: 'concepto',
+          path: 'comandos-sistema',
+        },
+      ],
+    },
   ],
 };
 

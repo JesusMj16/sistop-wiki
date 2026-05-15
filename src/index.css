@@ -32,24 +32,60 @@
   --shadow-md: 0 2px 4px rgba(0, 0, 0, .04), 0 8px 24px -8px rgba(0, 0, 0, .12);
   --shadow-lg: 0 4px 8px rgba(0, 0, 0, .06), 0 24px 48px -16px rgba(0, 0, 0, .18);
 
-  /* Light-mode tokens for dark-aware components (note cards, callouts, animated panels).
-     Dark mode overrides these inside [data-theme='dark']. */
-  --paper-card:    #ffffff;
-  --paper-card-2:  #fafafa;
-  --paper-card-3:  #f3eee3;
-  --frame:         #000;
-  --frame-soft:    #1f1d1a;
-  --stamp:         #000;
-  --shadow-stamp:  #000;
-  --hi-amber:      #ffd84a;
-  --hi-amber-ink:  #000;
-  --hi-cobalt:     #296fbb;
-  --hi-emerald:    #2a9d3a;
-  --hi-rose:       #d11919;
-  --hi-grape:      #7a3fbf;
+  /* Neo-brutalist semantic tokens */
+  --bx-surface: #fff;        /* white panel/card surfaces */
+  --bx-surface-on: #000;     /* text on white surfaces */
+  --bx-fill: #000;           /* solid dark fills (badges, selected items) */
+  --bx-fill-on: #fff;        /* text on dark fills */
+  --bx-border: #000;         /* borders */
+  --bx-shadow: #000;         /* hard drop shadows */
+  --bx-accent-on: #000;      /* text on accent bg */
+  --bx-muted: #888;          /* muted placeholder text */
+  --bx-highlight: #ffd84a;   /* yellow callout/header surface */
+  --bx-highlight-on: #000;   /* text on yellow highlight */
+
+  /* Legacy aliases (kept for incremental migration). Map to --bx-* tokens
+     so they follow the same dark-mode flip. */
+  --paper-card:   var(--bx-surface);
+  --paper-card-2: #fafafa;
+  --paper-card-3: #f3eee3;
+  --frame:        var(--bx-border);
+  --frame-soft:   #1f1d1a;
+  --stamp:        var(--bx-fill);
+  --shadow-stamp: var(--bx-shadow);
+  --hi-amber:     var(--bx-highlight);
+  --hi-amber-ink: var(--bx-highlight-on);
+  --hi-cobalt:    #296fbb;
+  --hi-emerald:   #2a9d3a;
+  --hi-rose:      #d11919;
+  --hi-grape:     #7a3fbf;
 }
 
+[data-theme='dark'] {
+  --paper: #15140f;
+  --ink: #f3ede0;
+  --paper-2: color-mix(in oklab, var(--paper) 88%, var(--ink));
+  --paper-3: color-mix(in oklab, var(--paper) 78%, var(--ink));
+  --rule:   color-mix(in oklab, var(--ink) 18%, var(--paper));
+  --rule-2: color-mix(in oklab, var(--ink) 28%, var(--paper));
+  --accent-soft: color-mix(in oklab, var(--accent) 22%, var(--paper));
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, .3), 0 8px 24px -8px rgba(0, 0, 0, .5);
 
+  --bx-surface: #1f1c17;
+  --bx-surface-on: #e8e3d8;
+  --bx-fill: #e8e3d8;
+  --bx-fill-on: #15140f;
+  --bx-border: #5a5550;
+  --bx-shadow: rgba(0, 0, 0, .6);
+  --bx-accent-on: #15140f;
+  --bx-muted: #807a70;
+  --bx-highlight: #3d3520;
+  --bx-highlight-on: #d4c896;
+
+  --paper-card-2: #25221c;
+  --paper-card-3: #2a2620;
+  --frame-soft:   #e8e3d8;
+}
 
 /* Three cartoon-leaning display fonts. Selecting one in TweaksPanel swaps
    --f-display, which drives prose paragraphs (.prose-p uses var(--f-display)).

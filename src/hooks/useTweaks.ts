@@ -9,6 +9,7 @@ export interface Tweaks {
   paletteId: string;
   fontPair: FontPair;
   density: 'compact' | 'regular' | 'comfy';
+  dark: boolean;
   fontSize: number;
 }
 
@@ -29,6 +30,7 @@ export const TWEAK_DEFAULTS: Tweaks = {
   paletteId: DEFAULT_PALETTE_ID,
   fontPair: 'fraunces',
   density: 'regular',
+  dark: false,
   fontSize: 25,
 };
 
@@ -48,6 +50,7 @@ function migrate(raw: unknown): Tweaks {
     paletteId: paletteId ?? DEFAULT_PALETTE_ID,
     fontPair:  normaliseFontPair(t.fontPair),
     density:   t.density   ?? TWEAK_DEFAULTS.density,
+    dark:      t.dark      ?? TWEAK_DEFAULTS.dark,
     fontSize:  t.fontSize  ?? TWEAK_DEFAULTS.fontSize,
   };
 }
@@ -58,6 +61,7 @@ export function useTweaks() {
 
   useEffect(() => {
     const root = document.documentElement;
+    root.dataset.theme = tweaks.dark ? 'dark' : 'light';
     root.dataset.density = tweaks.density;
     root.dataset.fontpair = tweaks.fontPair;
     root.style.setProperty('--reader-fs', tweaks.fontSize + 'px');

@@ -13,8 +13,8 @@
   top: 0;
   height: 6px;
   z-index: 11;
-  background: var(--paper-card);
-  border-bottom: 3px solid var(--frame);
+  background: var(--bx-surface);
+  border-bottom: 3px solid var(--bx-border);
   pointer-events: none;
 }
 .read-progress-bar {

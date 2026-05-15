@@ -10,6 +10,8 @@ import callWait from './pages/notes/callWait';
 import IntroIPC from './pages/notes/IntroIPC';
 import Pipes from './pages/notes/Pipes';
 import Fifos from './pages/notes/Fifos';
+import Llaves from './pages/notes/Llaves';
+import SemaforosSysV from './pages/notes/SemaforosSysV';
 
 
 
@@ -30,7 +32,9 @@ export const router = createBrowserRouter([
           { path: 'procesos/llamada-wait', Component: callWait },
           { path: 'ipc/intro-ipc', Component: IntroIPC },
           { path: 'ipc/pipes', Component: Pipes },
-          { path: 'ipc/fifos', Component: Fifos }
+          { path: 'ipc/fifos', Component: Fifos },
+          { path: 'ipc/llaves', Component: Llaves },
+          { path: 'ipc/semaforos-sysv', Component: SemaforosSysV }
         ],
       },
     ],

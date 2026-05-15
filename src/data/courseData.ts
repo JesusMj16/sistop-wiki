@@ -73,21 +73,33 @@ export const COURSE: Course = {
       notes: [
         {
           id: 'n3-1',
-          title: 'Introducción a IPC',
+          title: '3.0 Introducción a IPC',
           kind: 'sintesis',
           path: 'intro-ipc',
         },
         {
           id: 'n3-2',
-          title: 'Tuberías sin nombre - pipe',
+          title: '3.1.1 Tuberías sin nombre - pipe',
           kind: 'concepto',
           path: 'pipes',
         },
         {
           id: 'n3-3',
-          title: 'Tuberías con nombre - FIFO',
+          title: '3.1.2 Tuberías con nombre - fifo',
           kind: 'concepto',
           path: 'fifos',
+        },
+        {
+          id: 'n3-4',
+          title: '3.2.1 Llaves',
+          kind: 'concepto',
+          path: 'llaves',
+        },
+        {
+          id: 'n3-5',
+          title: '3.2.2 Semáforos en derivados de System V',
+          kind: 'concepto',
+          path: 'semaforos-sysv',
         },
       ],
     },

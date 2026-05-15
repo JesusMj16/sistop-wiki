@@ -31,6 +31,18 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .04), 0 1px 3px rgba(0, 0, 0, .04);
   --shadow-md: 0 2px 4px rgba(0, 0, 0, .04), 0 8px 24px -8px rgba(0, 0, 0, .12);
   --shadow-lg: 0 4px 8px rgba(0, 0, 0, .06), 0 24px 48px -16px rgba(0, 0, 0, .18);
+
+  /* Neo-brutalist semantic tokens */
+  --bx-surface: #fff;        /* white panel/card surfaces */
+  --bx-surface-on: #000;     /* text on white surfaces */
+  --bx-fill: #000;           /* solid dark fills (badges, selected items) */
+  --bx-fill-on: #fff;        /* text on dark fills */
+  --bx-border: #000;         /* borders */
+  --bx-shadow: #000;         /* hard drop shadows */
+  --bx-accent-on: #000;      /* text on accent bg */
+  --bx-muted: #888;          /* muted placeholder text */
+  --bx-highlight: #ffd84a;   /* yellow callout/header surface */
+  --bx-highlight-on: #000;   /* text on yellow highlight */
 }
 
 [data-theme='dark'] {
@@ -42,6 +54,17 @@
   --rule-2: color-mix(in oklab, var(--ink) 28%, var(--paper));
   --accent-soft: color-mix(in oklab, var(--accent) 22%, var(--paper));
   --shadow-md: 0 2px 4px rgba(0, 0, 0, .3), 0 8px 24px -8px rgba(0, 0, 0, .5);
+
+  --bx-surface: #1f1c17;
+  --bx-surface-on: #e8e3d8;
+  --bx-fill: #e8e3d8;
+  --bx-fill-on: #15140f;
+  --bx-border: #5a5550;
+  --bx-shadow: rgba(0, 0, 0, .6);
+  --bx-accent-on: #15140f;
+  --bx-muted: #807a70;
+  --bx-highlight: #3d3520;
+  --bx-highlight-on: #d4c896;
 }
 
 [data-fontpair='serif-classic'] {

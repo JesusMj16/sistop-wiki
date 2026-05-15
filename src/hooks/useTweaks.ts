@@ -26,8 +26,13 @@ export function useTweaks() {
     root.dataset.density = tweaks.density;
     root.dataset.fontpair = tweaks.fontPair;
     root.style.setProperty('--accent', tweaks.palette[0]);
-    root.style.setProperty('--ink', tweaks.palette[1]);
-    root.style.setProperty('--paper', tweaks.palette[2]);
+    if (tweaks.dark) {
+      root.style.removeProperty('--ink');
+      root.style.removeProperty('--paper');
+    } else {
+      root.style.setProperty('--ink', tweaks.palette[1]);
+      root.style.setProperty('--paper', tweaks.palette[2]);
+    }
     root.style.setProperty('--reader-fs', tweaks.fontSize + 'px');
   }, [tweaks]);
 

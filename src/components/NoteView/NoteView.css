@@ -1,10 +1,10 @@
 .note { margin-bottom: 36px; }
 .note-card {
   position: relative;
-  background: #fff;
-  border: 4px solid #000;
+  background: var(--bx-surface);
+  border: 4px solid var(--bx-border);
   border-radius: 0;
-  box-shadow: 10px 10px 0 #000;
+  box-shadow: 10px 10px 0 var(--bx-shadow);
   overflow: hidden;
   font-family: "Arial", sans-serif;
 }
@@ -15,34 +15,34 @@
   gap: 8px;
   position: absolute;
   top: 18px; left: -4px;
-  background: #000;
-  color: #fff;
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
   padding: 8px 18px 8px 18px;
   font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   font-weight: 900;
-  border: 3px solid #000;
+  border: 3px solid var(--bx-border);
   border-left: 0;
-  box-shadow: 5px 5px 0 #000;
+  box-shadow: 5px 5px 0 var(--bx-shadow);
   font-family: "Arial", sans-serif;
   z-index: 2;
 }
 .note-ribbon svg { width: 14px; height: 14px; }
-.ribbon-concepto { background: #296fbb; }
-.ribbon-ejercicio { background: #2a9d3a; }
-.ribbon-referencia { background: #e07b00; }
-.ribbon-diagrama { background: #7a3fbf; }
-.ribbon-sintesis { background: #d11919; }
+.ribbon-concepto { background: #296fbb; color: #fff; }
+.ribbon-ejercicio { background: #2a9d3a; color: #fff; }
+.ribbon-referencia { background: #e07b00; color: #fff; }
+.ribbon-diagrama { background: #7a3fbf; color: #fff; }
+.ribbon-sintesis { background: #d11919; color: #fff; }
 
 .note-head {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  background-color: #ffd84a;
+  background-color: var(--bx-highlight);
   grid-template-rows: auto auto;
   gap: 10px 22px;
   padding: 70px 30px 26px;
-  border-bottom: 4px solid #000;
+  border-bottom: 4px solid var(--bx-border);
   align-items: center;
 }
 .note-counter {
@@ -56,26 +56,26 @@
 .counter-num {
   font-size: 42px;
   font-weight: 900;
-  color: #000;
+  color: var(--bx-surface-on);
   letter-spacing: -.02em;
   font-feature-settings: "lnum";
-  background: #fff;
-  border: 3px solid #000;
+  background: var(--bx-surface);
+  border: 3px solid var(--bx-border);
   padding: 4px 10px;
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: 4px 4px 0 var(--bx-shadow);
 }
 .counter-of {
   font-size: 10px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #000;
+  color: var(--bx-highlight-on);
   font-family: "Arial", sans-serif;
   margin-top: 8px;
   font-weight: 900;
 }
 .note-title {
   grid-column: 2;
-  color: #000;
+  color: var(--bx-highlight-on);
   grid-row: 1 / span 2;
   font-family: "Arial", sans-serif;
   font-size: 32px;
@@ -94,25 +94,25 @@
   gap: 8px;
 }
 .tool-btn {
-  appearance: none; border: 3px solid #000;
-  background: #fff;
-  color: #000;
+  appearance: none; border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-surface-on);
   width: 38px; height: 38px;
   border-radius: 0;
   display: grid; place-items: center;
   cursor: pointer;
   transition: transform .15s, box-shadow .15s;
-  box-shadow: 3px 3px 0 #000;
+  box-shadow: 3px 3px 0 var(--bx-shadow);
 }
-.tool-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #000; }
+.tool-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--bx-shadow); }
 .tool-btn:active { transform: translate(3px, 3px); box-shadow: none; }
-.tool-btn[aria-pressed="true"] { background: #000; color: #fff; }
+.tool-btn[aria-pressed="true"] { background: var(--bx-fill); color: var(--bx-fill-on); }
 .tool-btn svg { width: 16px; height: 16px; }
 .tool-done {
   appearance: none;
-  border: 3px solid #000;
-  background: #fff;
-  color: #000;
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-surface-on);
   font-family: "Arial", sans-serif; font-size: 12px;
   padding: 0 16px;
   height: 38px;
@@ -123,21 +123,22 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: .06em;
-  box-shadow: 3px 3px 0 #000;
+  box-shadow: 3px 3px 0 var(--bx-shadow);
 }
 .tool-done:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 #000;
+  box-shadow: 5px 5px 0 var(--bx-shadow);
   background: #296fbb;
   color: #fff;
 }
 .tool-done:active { transform: translate(3px, 3px); box-shadow: none; }
 .tool-done.is-done {
-  background: #000; color: #fff; border-color: #000;
+  background: var(--bx-fill); color: var(--bx-fill-on); border-color: var(--bx-border);
 }
 .tool-done.is-done:hover {
   background: #2a9d3a;
-  border-color: #000;
+  color: #fff;
+  border-color: var(--bx-border);
 }
 .tool-done svg { width: 14px; height: 14px; }
 
@@ -177,32 +178,32 @@
 
 .note-foot {
   padding: 18px 30px 26px;
-  border-top: 4px solid #000;
-  background: #fff;
+  border-top: 4px solid var(--bx-border);
+  background: var(--bx-surface);
 }
 .own-prompt {
   appearance: none;
-  background: #fff;
+  background: var(--bx-surface);
   width: 100%;
   padding: 14px 18px;
   border-radius: 0;
   display: flex; align-items: center; gap: 12px;
   font-family: "Arial", sans-serif; font-size: 13px;
-  color: #000;
+  color: var(--bx-surface-on);
   cursor: pointer;
-  border: 3px solid #000;
+  border: 3px solid var(--bx-border);
   transition: transform .2s, box-shadow .2s, background .2s, color .2s;
   text-align: left;
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: .06em;
-  box-shadow: 5px 5px 0 #000;
+  box-shadow: 5px 5px 0 var(--bx-shadow);
 }
 .own-prompt:hover {
   background: #296fbb;
   color: #fff;
   transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 #000;
+  box-shadow: 7px 7px 0 var(--bx-shadow);
 }
 .own-prompt:active { transform: translate(5px, 5px); box-shadow: none; }
 .own-prompt > span { flex: 1; }

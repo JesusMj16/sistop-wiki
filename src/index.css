@@ -31,18 +31,25 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .04), 0 1px 3px rgba(0, 0, 0, .04);
   --shadow-md: 0 2px 4px rgba(0, 0, 0, .04), 0 8px 24px -8px rgba(0, 0, 0, .12);
   --shadow-lg: 0 4px 8px rgba(0, 0, 0, .06), 0 24px 48px -16px rgba(0, 0, 0, .18);
+
+  /* Light-mode tokens for dark-aware components (note cards, callouts, animated panels).
+     Dark mode overrides these inside [data-theme='dark']. */
+  --paper-card:    #ffffff;
+  --paper-card-2:  #fafafa;
+  --paper-card-3:  #f3eee3;
+  --frame:         #000;
+  --frame-soft:    #1f1d1a;
+  --stamp:         #000;
+  --shadow-stamp:  #000;
+  --hi-amber:      #ffd84a;
+  --hi-amber-ink:  #000;
+  --hi-cobalt:     #296fbb;
+  --hi-emerald:    #2a9d3a;
+  --hi-rose:       #d11919;
+  --hi-grape:      #7a3fbf;
 }
 
-[data-theme='dark'] {
-  --paper: #15140f;
-  --ink: #f3ede0;
-  --paper-2: color-mix(in oklab, var(--paper) 88%, var(--ink));
-  --paper-3: color-mix(in oklab, var(--paper) 78%, var(--ink));
-  --rule:   color-mix(in oklab, var(--ink) 18%, var(--paper));
-  --rule-2: color-mix(in oklab, var(--ink) 28%, var(--paper));
-  --accent-soft: color-mix(in oklab, var(--accent) 22%, var(--paper));
-  --shadow-md: 0 2px 4px rgba(0, 0, 0, .3), 0 8px 24px -8px rgba(0, 0, 0, .5);
-}
+
 
 [data-fontpair='serif-classic'] {
   --f-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;

@@ -72,17 +72,6 @@ export default function TweaksPanel() {
             </div>
           </div>
 
-          <div className="twk-row twk-row-h">
-            <span className="twk-label">Modo oscuro</span>
-            <button
-              className="twk-toggle"
-              data-on={tweaks.dark}
-              role="switch"
-              aria-checked={tweaks.dark}
-              onClick={() => setTweak('dark', !tweaks.dark)}
-            />
-          </div>
-
           <div className="twk-section">Tipografía</div>
 
           <div className="twk-row">

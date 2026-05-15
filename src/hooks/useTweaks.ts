@@ -5,7 +5,6 @@ export interface Tweaks {
   palette: [string, string, string];
   fontPair: 'serif-classic' | 'humanist' | 'modern-sans' | 'editorial';
   density: 'compact' | 'regular' | 'comfy';
-  dark: boolean;
   fontSize: number;
 }
 
@@ -13,7 +12,6 @@ export const TWEAK_DEFAULTS: Tweaks = {
   palette: ['#c2603a', '#1f1d1a', '#f6f1e8'],
   fontPair: 'serif-classic',
   density: 'regular',
-  dark: false,
   fontSize: 17,
 };
 
@@ -22,7 +20,6 @@ export function useTweaks() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.dataset.theme = tweaks.dark ? 'dark' : 'light';
     root.dataset.density = tweaks.density;
     root.dataset.fontpair = tweaks.fontPair;
     root.style.setProperty('--accent', tweaks.palette[0]);

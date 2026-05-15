@@ -101,6 +101,24 @@ export const COURSE: Course = {
           kind: 'concepto',
           path: 'semaforos-sysv',
         },
+        {
+          id: 'n3-6',
+          title: '3.3 Memoria compartida',
+          kind: 'concepto',
+          path: 'memoria-compartida',
+        },
+        {
+          id: 'n3-7',
+          title: '3.4 Cola de mensajes',
+          kind: 'concepto',
+          path: 'cola-mensajes',
+        },
+        {
+          id: 'n3-8',
+          title: '3.5 Información de IPC por medio de comandos del sistema',
+          kind: 'referencia',
+          path: 'comandos-ipc',
+        },
       ],
     },
     {

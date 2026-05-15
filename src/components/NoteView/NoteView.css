@@ -41,7 +41,7 @@
 .note-head {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  background-color: var(--bx-highlight);
+  background-color: var(--accent);
   grid-template-rows: auto auto;
   gap: 10px 22px;
   padding: 70px 30px 26px;

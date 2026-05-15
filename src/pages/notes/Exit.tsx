@@ -1,4 +1,4 @@
-import { P, H2, H3, Code, Callout, CodeExplain } from '../../components/ui/Prose';
+import { P, H2, Code, Callout, CodeExplain } from '../../components/ui/Prose';
 
 export default function Exit() {
   return (

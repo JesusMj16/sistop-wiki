@@ -7,6 +7,14 @@ import CtrlProcesos from './pages/notes/CtrlProcesos';
 import Systemcall from './pages/notes/Systemcall';
 import IdentifyProcess from './pages/notes/IdentifyProcess';
 import callWait from './pages/notes/callWait';
+import Exit from './pages/notes/Exit';
+import Zombies from './pages/notes/Zombies';
+import Hilos from './pages/notes/Hilos';
+import Inanicion from './pages/notes/Inanicion';
+import Prevencion from './pages/notes/Prevencion';
+import Banquero from './pages/notes/Banquero';
+import Deteccion from './pages/notes/Deteccion';
+import Prediccion from './pages/notes/Prediccion';
 import IntroIPC from './pages/notes/IntroIPC';
 import Pipes from './pages/notes/Pipes';
 import Fifos from './pages/notes/Fifos';
@@ -34,6 +42,14 @@ export const router = createBrowserRouter([
           {path: 'procesos/systemcall-procesos', Component: Systemcall},
           { path: 'procesos/identify-process', Component: IdentifyProcess},
           { path: 'procesos/llamada-wait', Component: callWait },
+          { path: 'procesos/llamada-exit', Component: Exit },
+          { path: 'procesos/zombies', Component: Zombies },
+          { path: 'procesos/hilos', Component: Hilos },
+          { path: 'interbloqueo/inanicion', Component: Inanicion },
+          { path: 'interbloqueo/prevencion', Component: Prevencion },
+          { path: 'interbloqueo/banquero', Component: Banquero },
+          { path: 'interbloqueo/deteccion', Component: Deteccion },
+          { path: 'interbloqueo/prediccion', Component: Prediccion },
           { path: 'ipc/intro-ipc', Component: IntroIPC },
           { path: 'ipc/pipes', Component: Pipes },
           { path: 'ipc/fifos', Component: Fifos },

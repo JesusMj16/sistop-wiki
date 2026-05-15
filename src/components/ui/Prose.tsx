@@ -6,6 +6,10 @@ export { CowAnimation } from './CowAnimation';
 export { ProcessFanAnimation } from './ProcessFanAnimation';
 export { WaitTimeline } from './WaitTimeline';
 export { WaitpidMatrix } from './WaitpidMatrix';
+export { ZombieFlow } from './ZombieFlow';
+export { ThreadsFlow } from './ThreadsFlow';
+export { CircularWait } from './CircularWait';
+export { LinearOrdering } from './LinearOrdering';
 
 export type CalloutTone = 'idea' | 'warn' | 'info' | 'success' | 'danger';
 

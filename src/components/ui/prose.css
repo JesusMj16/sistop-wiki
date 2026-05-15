@@ -747,7 +747,7 @@
   background: #3d3520;
   color: #d4c896;
   padding: 10px 16px 10px 50px;
-  font-family: "Arial", sans-serif;
+  font-family: var(--f-display);
   font-size: 12.5px;
   font-weight: 600;
   line-height: 1.5;
@@ -776,7 +776,7 @@
   border: 4px solid var(--cow-ink);
   box-shadow: 10px 10px 0 var(--cow-ink);
   background: var(--cow-paper);
-  font-family: "Space Mono", "JetBrains Mono", "Courier New", monospace;
+  font-family: var(--f-mono);
   color: var(--cow-ink);
   overflow: hidden;
   position: relative;
@@ -813,10 +813,10 @@
   box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
 }
 .cow-intro-text {
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
-  font-size: 14px;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.95);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.6;
   margin: 0;
   color: var(--cow-ink);
 }
@@ -851,7 +851,7 @@
   box-shadow: 2px 2px 0 var(--cow-red);
 }
 .cow-step-label {
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+  font-family: var(--f-display);
   font-size: 14px;
   font-weight: 800;
   letter-spacing: .04em;
@@ -958,10 +958,10 @@
   display: inline-block;
   margin-bottom: 6px;
   text-transform: uppercase;
-  font-family: "Space Mono", monospace;
+  font-family: var(--f-mono);
 }
 .cow-proc-name {
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+  font-family: var(--f-display);
   font-size: 16px;
   font-weight: 900;
   text-transform: uppercase;
@@ -1001,12 +1001,12 @@
   font-weight: 900;
   padding: 2px 5px;
   letter-spacing: .08em;
-  font-family: "Space Mono", monospace;
+  font-family: var(--f-mono);
   flex-shrink: 0;
 }
 .cow-vpage-label {
   flex: 1;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--f-display);
   font-size: 11px;
   letter-spacing: .02em;
 }
@@ -1027,7 +1027,7 @@
   letter-spacing: .12em;
   padding: 2px 6px;
   border: 1.5px solid var(--cow-ink);
-  font-family: "Space Mono", monospace;
+  font-family: var(--f-mono);
 }
 .cow-rw { background: var(--cow-yellow); color: var(--cow-ink); }
 .cow-ro { background: #b0b0b0; color: var(--cow-ink); border-color: #4a4a4a; }
@@ -1101,7 +1101,7 @@
   filter: drop-shadow(3px 3px 0 var(--cow-ink));
 }
 .cow-flash-text {
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+  font-family: var(--f-display);
   font-size: 26px;
   font-weight: 900;
   fill: var(--cow-ink);
@@ -1149,7 +1149,7 @@
   50% { opacity: 0.35; }
 }
 .cow-ram-label {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--f-display);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: .22em;
@@ -1195,14 +1195,14 @@
   position: relative;
 }
 .cow-ppage-addr {
-  font-family: "Space Mono", "Courier New", monospace;
+  font-family: var(--f-mono);
   font-size: 11px;
   font-weight: 700;
   color: #8d8db0;
   letter-spacing: .06em;
 }
 .cow-ppage-name {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--f-display);
   font-size: 12px;
   font-weight: 900;
   color: #fff;
@@ -1268,10 +1268,10 @@
   gap: 10px;
 }
 .cow-desc-text {
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
-  font-size: 14px;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.92);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.6;
   color: var(--cow-ink);
   margin: 0;
 }
@@ -1279,7 +1279,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-family: "Space Mono", monospace;
+  font-family: var(--f-mono);
   font-size: 12px;
   font-weight: 600;
   color: var(--cow-ink);
@@ -1294,7 +1294,7 @@
   letter-spacing: .22em;
   padding: 3px 8px;
   flex-shrink: 0;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--f-display);
 }
 
 /* CONTROLS */
@@ -1312,7 +1312,7 @@
   border: 3px solid var(--cow-yellow);
   background: var(--cow-yellow);
   color: var(--cow-ink);
-  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+  font-family: var(--f-display);
   font-size: 12px;
   font-weight: 900;
   padding: 8px 16px;
@@ -1355,7 +1355,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Space Mono", monospace;
+  font-family: var(--f-mono);
   font-size: 11px;
   font-weight: 900;
 }
@@ -2433,3 +2433,503 @@
 }
 
 
+
+/* ════════════════════════════════════════════════════════════════════════
+   ZombieFlow — neo-brutalist, deliberately minimal.
+   Reusa .wt-lane* para las pistas (mismo lenguaje visual que WaitTimeline),
+   pero el chrome exterior es propio para evitar elementos redundantes
+   (intro card, dual progress, "CLAVE" duplicado, tags de cada sub-card).
+   ════════════════════════════════════════════════════════════════════════ */
+
+.zf-wrap {
+  --zf-ink:    var(--ink);
+  --zf-paper:  var(--paper);
+  --zf-frame:  var(--bx-border, #000);
+  --zf-shadow: var(--bx-shadow, #000);
+  --zf-accent: var(--hi-cobalt);
+  --zf-warn:   var(--hi-rose);
+
+  /* Mismas vars que esperan los .wt-lane* internos. */
+  --wt-ink:    var(--zf-ink);
+  --wt-paper:  var(--zf-paper);
+  --wt-blue:   var(--hi-cobalt);
+  --wt-yellow: var(--hi-amber);
+  --wt-red:    var(--hi-rose);
+  --wt-green:  var(--hi-emerald);
+  --wt-purple: var(--hi-grape);
+
+  background: var(--zf-paper);
+  border: 4px solid var(--zf-frame);
+  box-shadow: 10px 10px 0 var(--zf-shadow);
+  padding: 22px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Modos: dos pildoras grandes, fáciles de leer. */
+.zf-modes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.zf-mode {
+  appearance: none;
+  background: transparent;
+  border: 3px solid var(--zf-frame);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.95);
+  font-weight: 700;
+  color: var(--zf-ink);
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--zf-shadow);
+  transition: transform .15s, box-shadow .15s, background .15s, color .15s;
+}
+.zf-mode:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--zf-shadow); }
+.zf-mode-sub {
+  font-family: var(--f-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .65;
+}
+.zf-mode-on {
+  background: var(--zf-frame);
+  color: var(--zf-paper);
+}
+.zf-mode-on .zf-mode-sub { opacity: .85; }
+
+/* Header: número de paso + título. Un único anclaje, sin tags adicionales. */
+.zf-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.zf-step-num {
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 1.6);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--zf-accent);
+  letter-spacing: -.02em;
+}
+.zf-step-num small {
+  font-size: 0.5em;
+  color: var(--ink-3, #888);
+  font-weight: 600;
+  margin-left: 2px;
+}
+.zf-step-title {
+  margin: 0;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 1.05);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--zf-ink);
+}
+
+/* Grid: stage izquierda, código derecha. Una sola caja cada uno. */
+.zf-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 14px;
+}
+.zf-stage {
+  background: var(--bx-surface, #fff);
+  border: 3px solid var(--zf-frame);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zf-code {
+  list-style: none;
+  margin: 0;
+  padding: 12px 0;
+  background: var(--zf-ink);
+  color: var(--zf-paper);
+  border: 3px solid var(--zf-frame);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+  overflow: hidden;
+}
+.zf-code-line {
+  display: flex;
+  gap: 10px;
+  padding: 0 12px;
+}
+.zf-code-line-hot {
+  background: color-mix(in oklab, var(--zf-accent) 28%, transparent);
+}
+.zf-code-num {
+  color: color-mix(in oklab, var(--zf-paper) 40%, transparent);
+  width: 18px;
+  text-align: right;
+  font-feature-settings: "tnum";
+  user-select: none;
+}
+.zf-code-text {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre;
+}
+
+/* Descripción: un único párrafo, tipografía display. */
+.zf-desc {
+  margin: 0;
+  font-family: var(--f-display);
+  font-size: calc(var(--reader-fs) * 0.95);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--zf-ink);
+  border-left: 4px solid var(--zf-accent);
+  padding: 4px 0 4px 14px;
+}
+
+/* Navegación compacta: prev, dots, next en una sola fila. */
+.zf-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+.zf-nav-btn {
+  appearance: none;
+  background: var(--bx-surface, #fff);
+  border: 3px solid var(--zf-frame);
+  width: 40px; height: 36px;
+  cursor: pointer;
+  font-family: var(--f-body);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--zf-ink);
+  box-shadow: 3px 3px 0 var(--zf-shadow);
+  transition: transform .15s, box-shadow .15s;
+}
+.zf-nav-btn:hover:not(:disabled) { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--zf-shadow); }
+.zf-nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+.zf-nav-next { background: var(--zf-accent); color: var(--zf-paper); }
+
+.zf-dots {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+.zf-dot {
+  appearance: none;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--zf-frame);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background .15s, transform .15s;
+}
+.zf-dot:hover { background: var(--zf-accent); }
+.zf-dot-on { background: var(--zf-accent); transform: scale(1.15); }
+
+@media (max-width: 760px) {
+  .zf-modes { grid-template-columns: 1fr; }
+  .zf-grid  { grid-template-columns: 1fr; }
+  .zf-head  { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* Tipografía display dentro de los .wt-lane reusados, scoped a ZombieFlow. */
+.zf-wrap .wt-lane-name  { font-family: var(--f-display); font-size: 13px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.zf-wrap .wt-lane-pid   { font-family: var(--f-mono); }
+.zf-wrap .wt-lane-state { font-family: var(--f-display); font-weight: 700; }
+.zf-wrap .wt-zzz,
+.zf-wrap .wt-skull,
+.zf-wrap .wt-exit,
+.zf-wrap .wt-flash { font-family: var(--f-display); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   ThreadsFlow — extiende .zf-wrap con un stage compuesto: lane main +
+   carril de hilos + memoria compartida. Reusa toda la chrome (head, code,
+   desc, nav). Solo añade lo específico de hilos.
+   ════════════════════════════════════════════════════════════════════════ */
+.tf-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tf-threads {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 12px;
+  border: 2px dashed var(--bx-border, #000);
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+}
+.tf-thread {
+  background: var(--bx-surface, #fff);
+  border: 2px solid var(--bx-border, #000);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--f-display);
+  transition: opacity .2s, transform .2s;
+}
+.tf-thread.wt-cstate-none { opacity: .25; }
+.tf-thread.wt-cstate-reaped { opacity: .35; }
+.tf-thread-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.tf-thread-name {
+  font-family: var(--f-display);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.tf-thread-state {
+  font-family: var(--f-body);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .75;
+}
+.tf-thread-bar {
+  position: relative;
+  height: 8px;
+  background: color-mix(in oklab, var(--ink) 8%, transparent);
+  overflow: hidden;
+}
+.tf-thread-bar .wt-lane-bar {
+  position: absolute;
+  inset: 0;
+}
+
+/* memoria compartida */
+.tf-shared {
+  background: var(--bx-surface, #fff);
+  border: 3px solid var(--bx-border, #000);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tf-shared-tag {
+  font-family: var(--f-body);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .22em;
+  color: var(--ink);
+  opacity: .6;
+}
+.tf-shared-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.tf-cell {
+  border: 2px solid var(--bx-border, #000);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  background: color-mix(in oklab, var(--ink) 4%, transparent);
+  transition: background .25s, transform .25s;
+}
+.tf-cell-id {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  opacity: .55;
+}
+.tf-cell-val {
+  font-family: var(--f-mono);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.tf-cell-on {
+  background: color-mix(in oklab, var(--hi-emerald) 30%, var(--bx-surface, #fff));
+  transform: translateY(-1px);
+}
+.tf-cell-on .tf-cell-val { color: var(--ink); }
+
+@media (max-width: 760px) {
+  .tf-threads { grid-template-columns: 1fr; }
+  .tf-shared-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CircularWait — espera circular entre 2 procesos / 2 recursos.
+   ════════════════════════════════════════════════════════════════════════ */
+.cw-wrap .cw-stage {
+  background: var(--bx-surface, #fff);
+  border: 3px solid var(--bx-border, #000);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cw-svg { width: 100%; height: auto; max-height: 320px; }
+.cw-res {
+  fill: var(--bx-surface, #fff);
+  stroke: var(--bx-border, #000);
+  stroke-width: 3;
+  transition: fill .3s;
+}
+.cw-res-held { fill: color-mix(in oklab, var(--hi-amber) 70%, var(--bx-surface, #fff)); }
+.cw-res-label {
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 800;
+  fill: var(--ink);
+}
+.cw-proc {
+  fill: var(--bx-surface, #fff);
+  stroke: var(--bx-border, #000);
+  stroke-width: 3;
+  transition: fill .3s;
+}
+.cw-proc-stuck {
+  fill: color-mix(in oklab, var(--hi-rose) 60%, var(--bx-surface, #fff));
+  animation: cwShake 1.6s ease-in-out infinite;
+}
+@keyframes cwShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+.cw-proc-label {
+  font-family: var(--f-display);
+  font-size: 20px;
+  font-weight: 800;
+  fill: var(--ink);
+}
+.cw-edge {
+  stroke-width: 3;
+  fill: none;
+}
+.cw-edge-hold { stroke: var(--bx-border, #000); }
+.cw-edge-want {
+  stroke: var(--hi-rose);
+  stroke-dasharray: 6 4;
+  animation: cwDash 1s linear infinite;
+}
+@keyframes cwDash {
+  to { stroke-dashoffset: -20; }
+}
+.cw-arrow-head { fill: var(--bx-border, #000); }
+.cw-arrow-head-want { fill: var(--hi-rose); }
+
+.cw-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  font-family: var(--f-body);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.cw-legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.cw-legend-swatch {
+  display: inline-block;
+  width: 22px; height: 4px;
+}
+.cw-legend-hold { background: var(--bx-border, #000); }
+.cw-legend-want {
+  background: repeating-linear-gradient(90deg, var(--hi-rose) 0 6px, transparent 6px 10px);
+}
+.cw-badge {
+  margin-left: auto;
+  padding: 4px 10px;
+  font-family: var(--f-body);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .2em;
+  border: 2px solid var(--bx-border, #000);
+  text-transform: uppercase;
+}
+.cw-badge-bad { background: var(--hi-rose); color: var(--paper); }
+.cw-badge-ok  { background: var(--hi-emerald); color: var(--paper); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   LinearOrdering — recursos numerados, flechas hacia arriba.
+   ════════════════════════════════════════════════════════════════════════ */
+.lo-wrap .lo-stage {
+  background: var(--bx-surface, #fff);
+  border: 3px solid var(--bx-border, #000);
+  padding: 18px;
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+.lo-svg {
+  flex: 0 0 auto;
+  width: 220px;
+  height: auto;
+}
+.lo-axis { stroke: color-mix(in oklab, var(--ink) 25%, transparent); stroke-width: 2; stroke-dasharray: 4 4; }
+.lo-res {
+  fill: var(--bx-surface, #fff);
+  stroke: var(--bx-border, #000);
+  stroke-width: 3;
+  transition: fill .3s;
+}
+.lo-res-held    { fill: color-mix(in oklab, var(--hi-cobalt) 35%, var(--bx-surface, #fff)); }
+.lo-res-req-ok  { fill: color-mix(in oklab, var(--hi-emerald) 55%, var(--bx-surface, #fff)); animation: loPulse 1.4s ease-in-out infinite; }
+.lo-res-req-bad { fill: color-mix(in oklab, var(--hi-rose) 55%, var(--bx-surface, #fff)); animation: loPulse 1.4s ease-in-out infinite; }
+@keyframes loPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .65; }
+}
+.lo-res-label {
+  font-family: var(--f-display);
+  font-size: 13px;
+  font-weight: 800;
+  fill: var(--ink);
+}
+.lo-edge {
+  stroke-width: 3;
+  fill: none;
+}
+.lo-edge-ok  { stroke: var(--hi-emerald); }
+.lo-edge-bad { stroke: var(--hi-rose); }
+.lo-arrow-head-ok  { fill: var(--hi-emerald); }
+.lo-arrow-head-bad { fill: var(--hi-rose); }
+
+.lo-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  font-family: var(--f-body);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.lo-legend-item { display: inline-flex; align-items: center; gap: 10px; }
+.lo-legend-swatch { display: inline-block; width: 22px; height: 14px; border: 2px solid var(--bx-border, #000); }
+.lo-legend-held { background: color-mix(in oklab, var(--hi-cobalt) 35%, var(--bx-surface, #fff)); }
+.lo-legend-ok   { background: color-mix(in oklab, var(--hi-emerald) 55%, var(--bx-surface, #fff)); }
+.lo-legend-bad  { background: color-mix(in oklab, var(--hi-rose) 55%, var(--bx-surface, #fff)); }
+
+@media (max-width: 760px) {
+  .lo-wrap .lo-stage { flex-direction: column; align-items: center; }
+  .lo-legend { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+}

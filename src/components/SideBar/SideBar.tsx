@@ -1,13 +1,23 @@
+import { useState } from 'react';
 import { useCourse } from '../../context/CourseContext';
 import { useUI } from '../../context/UIContext';
-import { MenuIcon, SearchIcon } from '../Icons/Icons';
+import { MenuIcon, SearchIcon, GithubIcon, ArrowIcon } from '../Icons/Icons';
 import TocSection from './TocSection';
 import './SideBar.css';
+
+const AUTHORS = [
+  { name: 'Dante Neil Martínez Jiménez', user: 'NeilDMJ',  url: 'https://github.com/NeilDMJ' },
+  { name: 'Jesús Alfonso Morales Jaimes', user: 'JesusMj16', url: 'https://github.com/JesusMj16' },
+];
+const REPO_URL = 'https://github.com/JesusMj16/sistop-wiki';
+const INSTITUTION = 'Universidad Tecnológica de la Mixteca';
+const PROFESSOR = 'M.C. Gabriel Gerónimo Castillo';
 
 export default function SideBar() {
   const { course, pct, doneCount, totalNotes, goToNote, searchResults } = useCourse();
   const { setSidebarOpen, search, setSearch } = useUI();
   const filtered = search.trim() ? searchResults(search) : null;
+  const [infoOpen, setInfoOpen] = useState(false);
 
 
   return (
@@ -68,9 +78,62 @@ export default function SideBar() {
         )}
       </nav>
 
-      <div className="sidebar-foot">
-        <span className="dot" /> Tu progreso se guarda automáticamente
-      </div>
+      <section className={`sidebar-info ${infoOpen ? 'is-open' : ''}`} aria-label="Información del proyecto">
+        <button
+          type="button"
+          className="info-toggle"
+          onClick={() => setInfoOpen(o => !o)}
+          aria-expanded={infoOpen}
+          aria-controls="sidebar-info-body"
+        >
+          <span className="info-toggle-label">Acerca de este proyecto</span>
+          <ArrowIcon className={`info-toggle-chev ${infoOpen ? 'open' : ''}`} />
+        </button>
+
+        {infoOpen && (
+          <div className="info-body" id="sidebar-info-body">
+            <div className="info-block">
+              <div className="info-eyebrow">Curso</div>
+              <div className="info-course">{INSTITUTION}</div>
+              <div className="info-prof">{PROFESSOR}</div>
+            </div>
+
+            <div className="info-block">
+              <div className="info-eyebrow">Autores</div>
+              <ul className="info-authors">
+                {AUTHORS.map(a => (
+                  <li key={a.user}>
+                    <a
+                      className="info-author-link"
+                      href={a.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`GitHub de ${a.name}`}
+                    >
+                      <GithubIcon className="info-gh" />
+                      <span className="info-author-meta">
+                        <span className="info-author-name">{a.name}</span>
+                        <span className="info-author-user">@{a.user}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <a
+              className="info-repo"
+              href={REPO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Repositorio en GitHub"
+            >
+              <GithubIcon className="info-gh" />
+              <span>Repositorio del proyecto</span>
+            </a>
+          </div>
+        )}
+      </section>
     </aside>
   );
 }

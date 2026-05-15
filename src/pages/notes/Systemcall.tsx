@@ -1,4 +1,4 @@
-import { P, List, H2, H3, Code, Callout, ProcessFan, ForkTree, CodeExplain, CowAnimation } from '../../components/ui/Prose';
+import { P, List, H2, H3, Code, Callout, ForkTree, CodeExplain, CowAnimation } from '../../components/ui/Prose';
 
 export default function Systemcall() {
   return (

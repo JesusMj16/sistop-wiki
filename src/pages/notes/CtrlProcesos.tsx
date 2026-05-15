@@ -1,4 +1,3 @@
-import React from 'react'
 import { P, H3, List, Code} from '../../components/ui/Prose'
 
 export default function CtrlProcesos() {

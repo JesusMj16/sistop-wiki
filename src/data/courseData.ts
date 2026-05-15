@@ -60,7 +60,35 @@ export const COURSE: Course = {
           kind: 'concepto',
           path: 'llamada-wait',
         }
-        
+
+      ],
+    },
+    {
+      id: 's3',
+      number: '03',
+      title: 'Mecanismos de comunicación entre procesos - IPC',
+      summary: 'Tecnicas que el sistema operativo ofrece para que los procesos intercambien informacion y se sincronicen',
+      duration: '',
+      path: 'ipc',
+      notes: [
+        {
+          id: 'n3-1',
+          title: 'Introducción a IPC',
+          kind: 'sintesis',
+          path: 'intro-ipc',
+        },
+        {
+          id: 'n3-2',
+          title: 'Tuberías sin nombre - pipe',
+          kind: 'concepto',
+          path: 'pipes',
+        },
+        {
+          id: 'n3-3',
+          title: 'Tuberías con nombre - FIFO',
+          kind: 'concepto',
+          path: 'fifos',
+        },
       ],
     },
   ],

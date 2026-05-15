@@ -66,6 +66,12 @@ export function useTweaks() {
     root.dataset.fontpair = tweaks.fontPair;
     root.style.setProperty('--reader-fs', tweaks.fontSize + 'px');
     applyPalette(getPalette(tweaks.paletteId), root);
+    // In dark mode, the palette's --ink/--paper would invert the theme.
+    // Strip them so [data-theme='dark'] in index.css controls those tokens.
+    if (tweaks.dark) {
+      root.style.removeProperty('--ink');
+      root.style.removeProperty('--paper');
+    }
   }, [tweaks]);
 
   const setTweak = <K extends keyof Tweaks>(key: K, value: Tweaks[K]) => {

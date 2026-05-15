@@ -4,12 +4,6 @@ import type { Tweaks } from '../../hooks/useTweaks';
 import { PALETTES } from '../../hooks/palettes';
 import './TweaksPanel.css';
 
-/** Each option previews itself: `fontFamily` on the <option> renders the label
- *  in the font that will be applied. */
-const FONT_PAIRS: Array<{ value: Tweaks['fontPair']; label: string; preview: string }> = [
-  { value: 'fraunces',      label: 'Fraunces editorial',     preview: "'Fraunces', Georgia, serif" },
-];
-
 const DENSITIES: Array<Tweaks['density']> = ['compact', 'regular', 'comfy'];
 
 export default function TweaksPanel() {
@@ -41,8 +35,7 @@ export default function TweaksPanel() {
       </button>
       <div className="twk-panel" role="dialog" aria-label="Ajustes de tema">
         <div className="twk-panel-head">
-          <span>Tweaks</span>
-          <span className="twk-value">dev</span>
+          <span>Ajustes</span>
         </div>
         <div className="twk-panel-body">
           <div className="twk-section">Apariencia</div>
@@ -84,26 +77,7 @@ export default function TweaksPanel() {
             />
           </div>
 
-          <div className="twk-section">Tipografía</div>
-
-          <div className="twk-row">
-            <div className="twk-label">Pareja tipográfica</div>
-            <select
-              className="twk-select"
-              value={tweaks.fontPair}
-              onChange={(e) => setTweak('fontPair', e.target.value as Tweaks['fontPair'])}
-            >
-              {FONT_PAIRS.map(o => (
-                <option
-                  key={o.value}
-                  value={o.value}
-                  style={{ fontFamily: o.preview }}
-                >
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          <div className="twk-section">Lectura</div>
 
           <div className="twk-row">
             <div className="twk-label">

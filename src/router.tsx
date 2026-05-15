@@ -20,6 +20,9 @@ import Pipes from './pages/notes/Pipes';
 import Fifos from './pages/notes/Fifos';
 import Llaves from './pages/notes/Llaves';
 import SemaforosSysV from './pages/notes/SemaforosSysV';
+import MemoriaCompartida from './pages/notes/MemoriaCompartida';
+import ColaMensajes from './pages/notes/ColaMensajes';
+import ComandosIPC from './pages/notes/ComandosIPC';
 import MinishellIntro from './pages/notes/MinishellIntro';
 import MinishellArquitectura from './pages/notes/MinishellArquitectura';
 import MinishellComandosFS from './pages/notes/MinishellComandosFS';
@@ -55,6 +58,9 @@ export const router = createBrowserRouter([
           { path: 'ipc/fifos', Component: Fifos },
           { path: 'ipc/llaves', Component: Llaves },
           { path: 'ipc/semaforos-sysv', Component: SemaforosSysV },
+          { path: 'ipc/memoria-compartida', Component: MemoriaCompartida },
+          { path: 'ipc/cola-mensajes', Component: ColaMensajes },
+          { path: 'ipc/comandos-ipc', Component: ComandosIPC },
           { path: 'proyecto-minishell/intro', Component: MinishellIntro },
           { path: 'proyecto-minishell/arquitectura', Component: MinishellArquitectura },
           { path: 'proyecto-minishell/comandos-fs', Component: MinishellComandosFS },

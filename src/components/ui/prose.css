@@ -790,8 +790,8 @@
   border: 1px solid var(--accent);
 }
 .code-explain-note {
-  background: #ffd84a;
-  color: #000;
+  background: #283253;
+  color: #fff;
   padding: 10px 16px 10px 50px;
   font-family: "Arial", sans-serif;
   font-size: 12.5px;

@@ -9,6 +9,7 @@ export default function SideBar() {
   const { setSidebarOpen, search, setSearch } = useUI();
   const filtered = search.trim() ? searchResults(search) : null;
 
+
   return (
     <aside className="sidebar">
       <div className="sidebar-head">

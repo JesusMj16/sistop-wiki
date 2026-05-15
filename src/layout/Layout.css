@@ -10,6 +10,30 @@
 .app.focus .sidebar { transform: translateX(-100%); }
 .app.sidebar-closed .sidebar { transform: translateX(-100%); }
 
+/* Scrim that appears behind the sidebar on small screens when it's open as
+   an overlay. Click closes the sidebar. */
+.app-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 28;
+  background: rgba(0, 0, 0, .35);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  animation: scrimIn .2s ease-out;
+}
+@keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (min-width: 1280px) {
+  .app { grid-template-columns: 340px 1fr; }
+}
+
+@media (max-width: 1100px) {
+  .app { grid-template-columns: 280px 1fr; }
+}
+
 @media (max-width: 880px) {
-  .app { grid-template-columns: 1fr; }
+  .app,
+  .app.sidebar-closed,
+  .app.focus { grid-template-columns: 1fr; }
 }

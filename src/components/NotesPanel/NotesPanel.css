@@ -55,5 +55,11 @@
 }
 
 @media (max-width: 880px) {
-  .notes-panel { width: 100%; }
+  .notes-panel { width: 100%; box-shadow: none; }
+}
+@media (max-width: 480px) {
+  .notes-head { padding: 16px 16px; }
+  .notes-on { font-size: 18px; }
+  .notes-area { padding: 16px 16px; font-size: 14px; }
+  .notes-foot { padding: 10px 16px; font-size: 10px; }
 }

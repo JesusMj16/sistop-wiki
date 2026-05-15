@@ -41,3 +41,6 @@
 @media (max-width: 880px) {
   .article { padding: 24px 22px 100px; }
 }
+@media (max-width: 480px) {
+  .article { padding: 18px 14px 110px; }
+}

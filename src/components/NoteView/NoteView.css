@@ -257,6 +257,32 @@
   .note-head { padding: 60px 20px 20px; gap: 8px 16px; }
   .note-title { font-size: 24px; }
   .note-body, .note-foot { padding-left: 20px; padding-right: 20px; }
+  .note-card { box-shadow: 6px 6px 0 var(--bx-shadow); }
+}
+@media (max-width: 640px) {
+  .note-head {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 56px 16px 18px;
+    gap: 6px 12px;
+  }
+  .note-counter { grid-column: 1; grid-row: 1; }
+  .counter-num { font-size: 32px; padding: 2px 8px; }
+  .counter-of { font-size: 9px; margin-top: 4px; }
+  .note-title { font-size: 20px; grid-column: 2; grid-row: 1; }
+  .note-tools { grid-column: 1 / -1; grid-row: 2; flex-wrap: wrap; gap: 6px; }
+  .tool-btn { width: 34px; height: 34px; }
+  .tool-done { height: 34px; padding: 0 12px; font-size: 11px; }
+  .note-body { padding: 24px 16px 14px; font-size: 15px; }
+  .note-foot { padding: 14px 16px 20px; }
+  .own-prompt { padding: 12px 14px; font-size: 12px; }
+  .note-ribbon { top: 14px; padding: 6px 14px 6px 14px; font-size: 10px; }
+  .note-card { box-shadow: 4px 4px 0 var(--bx-shadow); border-width: 3px; }
+}
+@media (max-width: 380px) {
+  .note-title { font-size: 18px; }
+  .counter-num { font-size: 26px; }
+  .note-body > .prose-p:first-child::first-letter { font-size: 3.4em; }
 }
 
 

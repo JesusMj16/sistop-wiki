@@ -3014,3 +3014,72 @@
 }
 .ml-legend-item { display: inline-flex; align-items: center; gap: 8px; }
 .ml-sw { display: inline-block; width: 16px; height: 14px; border: 2px solid var(--bx-border, #000); }
+
+/* =========================================================================
+   Responsive guard rails
+   Goal: never force horizontal page scroll on small screens. Fixed-width
+   visualizations (cards, fans, fork trees, diagrams) shrink or scroll
+   inside their own container instead of bleeding past the viewport.
+   ========================================================================= */
+
+/* Generic safety: any block-level wrapper used inside .note-body can scroll
+   horizontally on its own if its content is wider than the viewport, rather
+   than pushing the entire layout. */
+.note-body img,
+.note-body svg { max-width: 100%; height: auto; }
+
+@media (max-width: 880px) {
+  .card-wrap,
+  .proc-fan,
+  .fork-tree,
+  .diagram,
+  .thinkers,
+  .fan-wrap,
+  .wt-wrap,
+  .wpm-wrap,
+  .cow-wrap,
+  .code-explain,
+  .prose-table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Fixed-width inner SVG / card surfaces become percentage-based. */
+  .card { width: 100%; max-width: 600px; }
+  .fork-tree { padding: 32px 18px 24px; box-shadow: 6px 6px 0 var(--bx-shadow); border-width: 3px; }
+  .proc-fan { padding: 22px 16px 18px; }
+
+  /* Inline-displayed prose titles can wrap and overflow horizontally
+     if their text is long. Allow them to break. */
+  .prose-title { display: block; white-space: normal; word-break: break-word; }
+}
+
+@media (max-width: 640px) {
+  .quote-mark-svg svg,
+  .callout-ic-svg svg { width: 120px; height: 120px; }
+
+  /* Down-tune oversized in-prose chip widths so a horizontal scroll
+     fallback is only the last resort. */
+  .proc-chip { width: 120px; padding: 8px 10px; }
+  .proc-fan-stage { height: 260px; perspective: 700px; }
+  .fork-node { width: 150px; padding: 10px 12px; }
+  .fan-node { width: 64px; }
+}
+
+@media (max-width: 480px) {
+  /* Prose body typography becomes denser, but the rhythm scale stays
+     tied to --reader-fs so the tweaks panel "size" slider still works. */
+  .prose-p { font-size: calc(var(--reader-fs) * 1.15); line-height: 1.5; }
+  .prose-list { font-size: calc(var(--reader-fs) * 1.05); }
+  .prose-list > li { padding: 6px 10px 6px 28px; box-shadow: 3px 3px 0 var(--bx-shadow); }
+  .prose-list > li::before { left: 8px; width: 10px; height: 10px; }
+
+  .prose-title { padding: 5px 10px 5px 14px; box-shadow: 3px 3px 0 var(--bx-shadow); border-width: 2px; }
+  .prose-title-h2 { font-size: calc(var(--reader-fs) * 1.3); }
+  .prose-title-h3 { font-size: calc(var(--reader-fs) * 1.15); }
+  .prose-title-h4 { font-size: calc(var(--reader-fs) * 1); }
+
+  .quote-mark-svg svg,
+  .callout-ic-svg svg { width: 90px; height: 90px; }
+
+  .proc-chip { width: 100px; padding: 6px 8px; }
+  .proc-chip-label { font-size: 12px; }
+  .proc-chip-desc { font-size: 10px; }
+}

@@ -12,6 +12,10 @@ import Pipes from './pages/notes/Pipes';
 import Fifos from './pages/notes/Fifos';
 import Llaves from './pages/notes/Llaves';
 import SemaforosSysV from './pages/notes/SemaforosSysV';
+import MinishellIntro from './pages/notes/MinishellIntro';
+import MinishellArquitectura from './pages/notes/MinishellArquitectura';
+import MinishellComandosFS from './pages/notes/MinishellComandosFS';
+import MinishellComandosSistema from './pages/notes/MinishellComandosSistema';
 
 
 
@@ -34,7 +38,11 @@ export const router = createBrowserRouter([
           { path: 'ipc/pipes', Component: Pipes },
           { path: 'ipc/fifos', Component: Fifos },
           { path: 'ipc/llaves', Component: Llaves },
-          { path: 'ipc/semaforos-sysv', Component: SemaforosSysV }
+          { path: 'ipc/semaforos-sysv', Component: SemaforosSysV },
+          { path: 'proyecto-minishell/intro', Component: MinishellIntro },
+          { path: 'proyecto-minishell/arquitectura', Component: MinishellArquitectura },
+          { path: 'proyecto-minishell/comandos-fs', Component: MinishellComandosFS },
+          { path: 'proyecto-minishell/comandos-sistema', Component: MinishellComandosSistema },
         ],
       },
     ],

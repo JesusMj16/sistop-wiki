@@ -3083,3 +3083,265 @@
   .proc-chip-label { font-size: 12px; }
   .proc-chip-desc { font-size: 10px; }
 }
+
+/* =========================================================================
+   FifoBlockingFlow — rendezvous visual del open() bloqueante
+   Reutiliza variables --zf-* del ZombieFlow chrome.
+   ========================================================================= */
+
+.fbf-wrap { --fbf-pipe: color-mix(in oklab, var(--accent) 32%, var(--bx-surface)); }
+
+.fbf-grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+
+.fbf-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-content: start;
+}
+
+/* Auto-play button — sits on the right of the step title */
+.fbf-play {
+  margin-left: auto;
+  appearance: none;
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-surface-on);
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--bx-shadow);
+  transition: transform .15s, box-shadow .15s, background .15s, color .15s;
+}
+.fbf-play:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--bx-shadow); }
+.fbf-play:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--bx-shadow); }
+.fbf-play-on { background: var(--accent); color: var(--bx-accent-on); }
+
+/* Lanes (writer + reader) — visual states layered on top of .wt-lane */
+.fbf-end .wt-lane-bar { background: color-mix(in oklab, var(--bx-surface-on) 22%, var(--bx-surface)); }
+.fbf-end-absent  .wt-lane-bar { background: repeating-linear-gradient(135deg, var(--bx-surface) 0 8px, color-mix(in oklab, var(--bx-border) 12%, var(--bx-surface)) 8px 14px); opacity: .55; }
+.fbf-end-blocked .wt-lane-bar { background: repeating-linear-gradient(135deg, var(--hi-amber) 0 10px, color-mix(in oklab, var(--hi-amber) 70%, var(--bx-border)) 10px 16px); }
+.fbf-end-open    .wt-lane-bar { background: var(--hi-emerald); }
+.fbf-end-closing .wt-lane-bar { background: var(--hi-rose); }
+.fbf-end-closed  .wt-lane-bar { background: var(--bx-border); opacity: .35; }
+
+.fbf-end-blocked { animation: fbfPulse 1.4s ease-in-out infinite; }
+@keyframes fbfPulse {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+}
+
+.fbf-x {
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--f-display);
+  font-weight: 900;
+  color: var(--hi-rose);
+  font-size: 22px;
+}
+
+/* The pipe itself — kernel buffer between the two ends */
+.fbf-pipe {
+  position: relative;
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  box-shadow: 6px 6px 0 var(--bx-shadow);
+  padding: 16px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fbf-pipe-live::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 3px solid var(--hi-emerald);
+  pointer-events: none;
+  animation: fbfLive 1.2s ease-in-out infinite;
+}
+@keyframes fbfLive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+
+.fbf-pipe-tag {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--bx-surface-on);
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  display: inline-block;
+  padding: 4px 10px;
+  align-self: flex-start;
+  border: 2px solid var(--bx-border);
+}
+
+.fbf-pipe-body {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: stretch;
+  gap: 0;
+  min-height: 88px;
+}
+
+.fbf-pipe-cap {
+  width: 22px;
+  background: var(--bx-fill);
+  border: 3px solid var(--bx-border);
+}
+.fbf-pipe-cap-l { border-right: 0; }
+.fbf-pipe-cap-r { border-left: 0; }
+
+.fbf-pipe-tube {
+  position: relative;
+  border-top: 3px solid var(--bx-border);
+  border-bottom: 3px solid var(--bx-border);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 22px,
+      color-mix(in oklab, var(--bx-border) 6%, transparent) 22px 23px
+    ),
+    var(--fbf-pipe);
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  overflow: hidden;
+  min-height: 84px;
+}
+
+.fbf-buffer {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+.fbf-buffer-empty {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: color-mix(in oklab, var(--bx-surface-on) 55%, transparent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.fbf-byte {
+  display: inline-grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  background: var(--bx-surface);
+  border: 3px solid var(--bx-border);
+  box-shadow: 3px 3px 0 var(--bx-shadow);
+  font-family: var(--f-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bx-surface-on);
+  animation: fbfByteIn .35s cubic-bezier(.3, .7, .4, 1.4) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+@keyframes fbfByteIn {
+  from { opacity: 0; transform: translateX(-26px) scale(.7); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.fbf-buffer-flow .fbf-byte {
+  animation: fbfByteFlow 1.2s cubic-bezier(.55, .1, .3, 1) infinite both;
+  animation-delay: calc(var(--i) * 140ms);
+}
+@keyframes fbfByteFlow {
+  0%   { transform: translateX(0); opacity: 1; }
+  60%  { transform: translateX(120px); opacity: 1; }
+  75%  { transform: translateX(160px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 0; }
+}
+
+.fbf-arrow {
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 2px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 22px;
+  color: color-mix(in oklab, var(--bx-border) 35%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.fbf-arrow span {
+  opacity: .25;
+  transition: opacity .2s, color .2s;
+}
+.fbf-arrow-on span {
+  color: var(--hi-emerald);
+  animation: fbfArrow 1.1s ease-in-out infinite;
+}
+.fbf-arrow-on span:nth-child(1) { animation-delay: 0s; }
+.fbf-arrow-on span:nth-child(2) { animation-delay: .18s; }
+.fbf-arrow-on span:nth-child(3) { animation-delay: .36s; }
+@keyframes fbfArrow {
+  0%, 100% { opacity: .25; transform: translateX(0); }
+  50%      { opacity: 1;   transform: translateX(4px); }
+}
+
+/* Legend strip: W ─── R, lights up when each end is open */
+.fbf-pipe-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 6px;
+  border-top: 2px dashed color-mix(in oklab, var(--bx-border) 35%, transparent);
+}
+.fbf-leg {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 13px;
+  width: 28px; height: 28px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-surface-on);
+  transition: background .2s, color .2s, transform .2s;
+}
+.fbf-leg-line {
+  flex: 1;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--bx-border) 0 8px,
+    transparent 8px 14px
+  );
+}
+.fbf-leg-on {
+  background: var(--hi-emerald);
+  color: var(--bx-surface);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 var(--bx-border);
+}
+
+/* Responsive — at narrow widths the stage stacks above the code, and the
+   pipe body collapses to a vertical orientation so bytes stay legible. */
+@media (max-width: 880px) {
+  .fbf-grid { grid-template-columns: 1fr; }
+  .fbf-pipe-body { min-height: 72px; }
+  .fbf-byte { width: 30px; height: 30px; font-size: 14px; }
+  .fbf-play { padding: 5px 9px; font-size: 10px; }
+}
+@media (max-width: 480px) {
+  .fbf-pipe { padding: 12px 10px 10px; box-shadow: 4px 4px 0 var(--bx-shadow); }
+  .fbf-pipe-cap { width: 14px; }
+  .fbf-pipe-tube { padding: 8px 10px; min-height: 64px; }
+  .fbf-byte { width: 26px; height: 26px; font-size: 12px; box-shadow: 2px 2px 0 var(--bx-shadow); }
+  .fbf-arrow { font-size: 18px; right: 6px; }
+}

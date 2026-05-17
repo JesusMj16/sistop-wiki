@@ -11,6 +11,7 @@ export { ThreadsFlow } from './ThreadsFlow';
 export { CircularWait } from './CircularWait';
 export { LinearOrdering } from './LinearOrdering';
 export { MemoryLayout } from './MemoryLayout';
+export { FifoBlockingFlow } from './FifoBlockingFlow';
 
 export type CalloutTone = 'idea' | 'warn' | 'info' | 'success' | 'danger';
 

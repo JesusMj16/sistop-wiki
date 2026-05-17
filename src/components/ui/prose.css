@@ -3345,3 +3345,556 @@
   .fbf-byte { width: 26px; height: 26px; font-size: 12px; box-shadow: 2px 2px 0 var(--bx-shadow); }
   .fbf-arrow { font-size: 18px; right: 6px; }
 }
+
+/* =========================================================================
+   IpcKeyFlow — viaje de una llave IPC de System V
+   Dos procesos sin parentesco llegan al mismo recurso del kernel
+   pasando por ftok y semget.
+   ========================================================================= */
+
+.ikf-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+
+.ikf-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  align-content: start;
+}
+
+/* Process card on each side of the kernel block */
+.ikf-proc {
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 5px 5px 0 var(--bx-shadow);
+  transition: transform .25s, box-shadow .25s;
+}
+.ikf-proc-idle      { opacity: .55; }
+.ikf-proc-computing { background: color-mix(in oklab, var(--hi-amber) 22%, var(--bx-surface)); }
+.ikf-proc-hasKey    { border-color: var(--hi-cobalt); }
+.ikf-proc-hasId     { background: color-mix(in oklab, var(--hi-emerald) 18%, var(--bx-surface)); border-color: var(--hi-emerald); }
+.ikf-proc-waiting {
+  background: color-mix(in oklab, var(--hi-rose) 18%, var(--bx-surface));
+  border-color: var(--hi-rose);
+  animation: ikfWait 1.2s ease-in-out infinite;
+}
+.ikf-proc-signaled {
+  background: color-mix(in oklab, var(--hi-emerald) 30%, var(--bx-surface));
+  border-color: var(--hi-emerald);
+  transform: translateY(-3px);
+}
+.ikf-proc-done { opacity: .5; background: repeating-linear-gradient(45deg, var(--bx-surface) 0 8px, color-mix(in oklab, var(--bx-border) 15%, var(--bx-surface)) 8px 14px); }
+@keyframes ikfWait {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+}
+
+.ikf-proc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.ikf-proc-name {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: -.01em;
+  color: var(--bx-surface-on);
+}
+.ikf-proc-role {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: color-mix(in oklab, var(--bx-surface-on) 65%, transparent);
+}
+.ikf-proc-state {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border: 2px solid var(--bx-border);
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.ikf-proc-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.ikf-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px;
+  border: 2px solid var(--bx-border);
+  background: color-mix(in oklab, var(--bx-surface) 80%, var(--bx-border));
+}
+.ikf-slot-lbl {
+  font-family: var(--f-display);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 900;
+  color: color-mix(in oklab, var(--bx-surface-on) 60%, transparent);
+}
+.ikf-slot-val {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bx-surface-on);
+}
+
+/* Kernel block sits between the two processes */
+.ikf-kernel {
+  position: relative;
+  border: 4px solid var(--bx-border);
+  background: color-mix(in oklab, var(--accent) 12%, var(--bx-surface));
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 7px 7px 0 var(--bx-shadow);
+}
+.ikf-kernel-tag {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  border: 2px solid var(--bx-border);
+  align-self: flex-start;
+}
+
+/* Bus state — when a syscall is active, the relevant block pulses */
+.ikf-bus-ftok .ikf-file,
+.ikf-bus-ftok .ikf-hash { animation: ikfPulse 1s ease-in-out infinite; }
+.ikf-bus-get  .ikf-key,
+.ikf-bus-get  .ikf-sem  { animation: ikfPulse 1s ease-in-out infinite; }
+.ikf-bus-op   .ikf-sem  { animation: ikfPulse .9s ease-in-out infinite; }
+.ikf-bus-rmid .ikf-sem  { animation: ikfRmid 1.2s ease-in-out infinite; }
+@keyframes ikfPulse {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50%      { box-shadow: 0 0 0 4px color-mix(in oklab, var(--hi-emerald) 50%, transparent); }
+}
+@keyframes ikfRmid {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; transform: translateX(0); }
+  50%      { box-shadow: 0 0 0 4px var(--hi-rose); transform: translateX(-2px); }
+}
+
+.ikf-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 2px solid var(--bx-border);
+  background: var(--bx-surface);
+  box-shadow: 3px 3px 0 var(--bx-shadow);
+}
+.ikf-file-ic { font-size: 18px; }
+.ikf-file-path {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--bx-surface-on);
+}
+.ikf-file-proj {
+  margin-left: auto;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: color-mix(in oklab, var(--bx-surface-on) 70%, transparent);
+}
+
+.ikf-hash {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  border: 2px solid var(--bx-border);
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.ikf-hash-formula {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: .85;
+}
+.ikf-arrow-down { font-size: 14px; line-height: 1; }
+
+.ikf-key {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bx-surface);
+  border: 3px dashed var(--bx-border);
+  transition: border-style .2s, background .25s;
+}
+.ikf-key-on {
+  border-style: solid;
+  background: var(--hi-amber);
+  border-color: var(--bx-border);
+}
+.ikf-key-lbl {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--bx-surface-on);
+}
+.ikf-key-val {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--bx-surface-on);
+  margin-left: auto;
+}
+
+.ikf-sem {
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  box-shadow: 4px 4px 0 var(--bx-shadow);
+  display: flex;
+  flex-direction: column;
+}
+.ikf-sem-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 12px;
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  border-bottom: 2px solid var(--bx-border);
+}
+.ikf-sem-lbl {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.ikf-sem-id {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+.ikf-sem-body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  flex-wrap: wrap;
+}
+.ikf-sem-empty {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: color-mix(in oklab, var(--bx-surface-on) 55%, transparent);
+}
+.ikf-sem-val {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--bx-surface-on);
+  padding: 4px 10px;
+  border: 2px solid var(--bx-border);
+  background: color-mix(in oklab, var(--hi-emerald) 18%, var(--bx-surface));
+}
+.ikf-sem-wait {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--bx-surface-on);
+}
+.ikf-sem-wait-count {
+  display: inline-grid;
+  place-items: center;
+  width: 24px; height: 24px;
+  border: 2px solid var(--bx-border);
+  background: var(--hi-rose);
+  color: var(--bx-surface);
+  font-family: var(--f-mono);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+@media (max-width: 880px) {
+  .ikf-grid { grid-template-columns: 1fr; }
+  .ikf-proc-slots { grid-template-columns: 1fr 1fr; }
+  .ikf-key-val { font-size: 14px; }
+  .ikf-sem-val { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .ikf-proc { padding: 10px 12px; box-shadow: 3px 3px 0 var(--bx-shadow); }
+  .ikf-kernel { padding: 10px; box-shadow: 4px 4px 0 var(--bx-shadow); }
+  .ikf-proc-slots { grid-template-columns: 1fr; }
+  .ikf-file { padding: 6px 10px; }
+  .ikf-file-path { font-size: 11px; }
+  .ikf-sem-body { padding: 8px; gap: 8px; }
+}
+
+/* =========================================================================
+   SemaphoreFlow — ping-pong padre/hijo con 2 semáforos System V
+   ========================================================================= */
+
+.smf-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+
+.smf-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  align-content: start;
+}
+
+.smf-arena {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.smf-proc {
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 5px 5px 0 var(--bx-shadow);
+  position: relative;
+  transition: transform .25s, box-shadow .25s, background .25s, border-color .25s;
+}
+.smf-proc-idle { opacity: .55; }
+.smf-proc-running {
+  background: color-mix(in oklab, var(--hi-emerald) 22%, var(--bx-surface));
+  border-color: var(--hi-emerald);
+  transform: translateY(-2px);
+}
+.smf-proc-blocked {
+  background: color-mix(in oklab, var(--hi-rose) 14%, var(--bx-surface));
+  border-color: var(--hi-rose);
+  border-style: dashed;
+  animation: smfBlock 1.2s ease-in-out infinite;
+}
+.smf-proc-awakened {
+  background: var(--hi-amber);
+  border-color: var(--bx-border);
+  animation: smfWake .6s ease-out;
+}
+.smf-proc-done {
+  opacity: .5;
+  background: repeating-linear-gradient(45deg, var(--bx-surface) 0 8px, color-mix(in oklab, var(--bx-border) 15%, var(--bx-surface)) 8px 14px);
+}
+@keyframes smfBlock {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(-3px); }
+}
+@keyframes smfWake {
+  0%   { transform: scale(.95); box-shadow: 0 0 0 0 var(--hi-amber); }
+  60%  { transform: scale(1.04); box-shadow: 0 0 0 8px color-mix(in oklab, var(--hi-amber) 40%, transparent); }
+  100% { transform: scale(1); box-shadow: 5px 5px 0 var(--bx-shadow); }
+}
+
+.smf-proc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.smf-proc-name {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: -.01em;
+}
+.smf-proc-role {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: color-mix(in oklab, var(--bx-surface-on) 60%, transparent);
+}
+.smf-proc-state {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border: 2px solid var(--bx-border);
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* Kernel central block */
+.smf-kernel {
+  border: 4px solid var(--bx-border);
+  background: color-mix(in oklab, var(--accent) 14%, var(--bx-surface));
+  padding: 12px;
+  box-shadow: 7px 7px 0 var(--bx-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.smf-kernel-tag {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+  border: 2px solid var(--bx-border);
+  align-self: flex-start;
+}
+
+.smf-actor-padre .smf-sem:nth-child(2),
+.smf-actor-hijo  .smf-sem:nth-child(1) {
+  animation: smfTouch .9s ease-in-out infinite;
+}
+@keyframes smfTouch {
+  0%, 100% { box-shadow: 4px 4px 0 var(--bx-shadow); }
+  50%      { box-shadow: 4px 4px 0 var(--bx-shadow), 0 0 0 4px color-mix(in oklab, var(--hi-emerald) 50%, transparent); }
+}
+
+.smf-sem-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.smf-sem {
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 4px 4px 0 var(--bx-shadow);
+  transition: background .25s, transform .2s;
+}
+.smf-sem-closed { background: color-mix(in oklab, var(--hi-rose) 18%, var(--bx-surface)); }
+.smf-sem-open   { background: color-mix(in oklab, var(--hi-emerald) 22%, var(--bx-surface)); }
+
+.smf-sem-head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.smf-sem-idx {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: color-mix(in oklab, var(--bx-surface-on) 60%, transparent);
+}
+.smf-sem-name {
+  font-family: var(--f-display);
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.smf-sem-val {
+  font-family: var(--f-mono);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  padding: 4px 12px;
+  border: 2px solid var(--bx-border);
+  background: var(--bx-surface);
+}
+.smf-sem-state {
+  font-family: var(--f-display);
+  font-size: 9.5px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--bx-surface-on);
+}
+
+.smf-badge {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border: 2px solid var(--bx-border);
+  background: var(--bx-surface);
+  text-align: center;
+}
+.smf-badge-padre  { background: color-mix(in oklab, var(--hi-cobalt) 18%, var(--bx-surface)); }
+.smf-badge-hijo   { background: color-mix(in oklab, var(--hi-grape) 18%, var(--bx-surface)); }
+.smf-badge-kernel { background: var(--bx-fill); color: var(--bx-fill-on); }
+
+/* Output console */
+.smf-output {
+  border: 3px solid var(--bx-border);
+  background: var(--bx-surface);
+  box-shadow: 5px 5px 0 var(--bx-shadow);
+  display: flex;
+  flex-direction: column;
+}
+.smf-output-tag {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  background: var(--bx-fill);
+  color: var(--bx-fill-on);
+}
+.smf-output-body {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 12px;
+  margin: 0;
+  white-space: pre-wrap;
+  color: var(--bx-surface-on);
+  min-height: 60px;
+}
+
+@media (max-width: 880px) {
+  .smf-grid { grid-template-columns: 1fr; }
+  .smf-arena { grid-template-columns: 1fr; }
+  .smf-sem-val { font-size: 24px; padding: 3px 10px; }
+}
+@media (max-width: 480px) {
+  .smf-proc { padding: 10px 12px; box-shadow: 3px 3px 0 var(--bx-shadow); }
+  .smf-kernel { padding: 10px; box-shadow: 4px 4px 0 var(--bx-shadow); }
+  .smf-sem-val { font-size: 20px; }
+}

@@ -14,6 +14,8 @@ export { MemoryLayout } from './MemoryLayout';
 export { FifoBlockingFlow } from './FifoBlockingFlow';
 export { IpcKeyFlow } from './IpcKeyFlow';
 export { SemaphoreFlow } from './SemaphoreFlow';
+export { SharedMemoryFlow } from './SharedMemoryFlow';
+export { MessageQueueFlow } from './MessageQueueFlow';
 
 export type CalloutTone = 'idea' | 'warn' | 'info' | 'success' | 'danger';
 

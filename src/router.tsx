@@ -35,6 +35,8 @@ import InodosFS from './pages/notes/InodosFS';
 import TiposArchivos from './pages/notes/TiposArchivos';
 import DispositivosIO from './pages/notes/DispositivosIO';
 import IoctlYDisco from './pages/notes/IoctlYDisco';
+import Senales from './pages/notes/Senales';
+import TiposSenales from './pages/notes/TiposSenales';
 
 
 
@@ -81,6 +83,8 @@ export const router = createBrowserRouter([
           { path: 'arquitectura/tipos-archivos', Component: TiposArchivos },
           { path: 'arquitectura/dispositivos-io', Component: DispositivosIO },
           { path: 'arquitectura/ioctl-disco', Component: IoctlYDisco },
+          { path: 'signal/introduction', Component: Senales },
+          { path: 'signal/tipos-senales', Component: TiposSenales },
         ],
       },
     ],

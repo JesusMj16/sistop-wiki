@@ -279,8 +279,31 @@ export const COURSE: Course = {
           kind: 'concepto',
           path: 'ioctl-disco',
         },
+       
       ],
     },
+    {
+      id: 's8',
+      number: '08',
+      title: 'Señales del sistema',
+      summary: '',
+      duration: '',
+      path: 'signal',
+      notes :[
+        {
+          id: 'n8-1',
+          title: 'Introduccion a las Señales',
+          kind: 'concepto',
+          path: 'introduction',
+        },
+        {
+          id: 'n8-2',
+          title: 'Tipos de señales y kill',
+          kind: 'concepto',
+          path: 'tipos-senales',
+        },
+      ]
+    }
   ],
 };
 

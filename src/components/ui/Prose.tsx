@@ -25,6 +25,8 @@ export { DiskLayoutFlow } from './DiskLayoutFlow';
 export { FileTypesFlow } from './FileTypesFlow';
 export { IoDeviceFlow } from './IoDeviceFlow';
 export { DiskGeometryFlow } from './DiskGeometryFlow';
+export { SignalsFlow } from './SignalsFlow';
+export { SignalCatalog } from './SignalCatalog';
 
 export type CalloutTone = 'idea' | 'warn' | 'info' | 'success' | 'danger';
 

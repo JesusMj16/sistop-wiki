@@ -16,6 +16,7 @@ import Banquero from './pages/notes/Banquero';
 import Deteccion from './pages/notes/Deteccion';
 import Prediccion from './pages/notes/Prediccion';
 import MemoriaIntro from './pages/notes/MemoriaIntro';
+import AdminMemoria from './pages/notes/AdminMemoria';
 import IntroIPC from './pages/notes/IntroIPC';
 import Pipes from './pages/notes/Pipes';
 import Fifos from './pages/notes/Fifos';
@@ -28,6 +29,12 @@ import MinishellIntro from './pages/notes/MinishellIntro';
 import MinishellArquitectura from './pages/notes/MinishellArquitectura';
 import MinishellComandosFS from './pages/notes/MinishellComandosFS';
 import MinishellComandosSistema from './pages/notes/MinishellComandosSistema';
+import ArquitecturaFS from './pages/notes/ArquitecturaFS';
+import EstructuraLogicaFS from './pages/notes/EstructuraLogicaFS';
+import InodosFS from './pages/notes/InodosFS';
+import TiposArchivos from './pages/notes/TiposArchivos';
+import DispositivosIO from './pages/notes/DispositivosIO';
+import IoctlYDisco from './pages/notes/IoctlYDisco';
 
 
 
@@ -55,6 +62,7 @@ export const router = createBrowserRouter([
           { path: 'interbloqueo/deteccion', Component: Deteccion },
           { path: 'interbloqueo/prediccion', Component: Prediccion },
           { path: 'memoria/intro', Component: MemoriaIntro },
+          { path: 'memoria/admin', Component: AdminMemoria },
           { path: 'ipc/intro-ipc', Component: IntroIPC },
           { path: 'ipc/pipes', Component: Pipes },
           { path: 'ipc/fifos', Component: Fifos },
@@ -67,6 +75,12 @@ export const router = createBrowserRouter([
           { path: 'proyecto-minishell/arquitectura', Component: MinishellArquitectura },
           { path: 'proyecto-minishell/comandos-fs', Component: MinishellComandosFS },
           { path: 'proyecto-minishell/comandos-sistema', Component: MinishellComandosSistema },
+          { path: 'arquitectura/sistema-archivos', Component: ArquitecturaFS },
+          { path: 'arquitectura/estructura-logica', Component: EstructuraLogicaFS },
+          { path: 'arquitectura/inodos', Component: InodosFS },
+          { path: 'arquitectura/tipos-archivos', Component: TiposArchivos },
+          { path: 'arquitectura/dispositivos-io', Component: DispositivosIO },
+          { path: 'arquitectura/ioctl-disco', Component: IoctlYDisco },
         ],
       },
     ],

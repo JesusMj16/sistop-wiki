@@ -16,6 +16,15 @@ export { IpcKeyFlow } from './IpcKeyFlow';
 export { SemaphoreFlow } from './SemaphoreFlow';
 export { SharedMemoryFlow } from './SharedMemoryFlow';
 export { MessageQueueFlow } from './MessageQueueFlow';
+export { PartitionQueueFlow } from './PartitionQueueFlow';
+export { MemoryTrackingFlow } from './MemoryTrackingFlow';
+export { FsDriverFlow } from './FsDriverFlow';
+export { SuperblockSyncFlow } from './SuperblockSyncFlow';
+export { InodeAnatomyFlow } from './InodeAnatomyFlow';
+export { DiskLayoutFlow } from './DiskLayoutFlow';
+export { FileTypesFlow } from './FileTypesFlow';
+export { IoDeviceFlow } from './IoDeviceFlow';
+export { DiskGeometryFlow } from './DiskGeometryFlow';
 
 export type CalloutTone = 'idea' | 'warn' | 'info' | 'success' | 'danger';
 

@@ -193,6 +193,12 @@ export const COURSE: Course = {
           kind: 'concepto',
           path: 'intro',
         },
+        {
+          id: 'n5-2',
+          title: '5.5–5.10 Administración avanzada y memoria virtual',
+          kind: 'concepto',
+          path: 'admin',
+        },
       ],
     },
     {
@@ -229,6 +235,75 @@ export const COURSE: Course = {
         },
       ],
     },
+    {
+      id: 's7',
+      number: '07',
+      title: 'Arquitectura del sistema',
+      summary: 'Anatomía del sistema de archivos UNIX. Boot, superbloque, inodos, área de datos y evolución del Extended File System',
+      duration: '',
+      path: 'arquitectura',
+      notes: [
+        {
+          id: 'n7-1',
+          title: '7.1 Arquitectura del sistema de archivos',
+          kind: 'concepto',
+          path: 'sistema-archivos',
+        },
+        {
+          id: 'n7-2',
+          title: '7.2 Estructura lógica y superbloque',
+          kind: 'concepto',
+          path: 'estructura-logica',
+        },
+        {
+          id: 'n7-3',
+          title: '7.2.2 Nodos índice (inodos)',
+          kind: 'concepto',
+          path: 'inodos',
+        },
+        {
+          id: 'n7-4',
+          title: '7.3 Tipos de archivos en Linux',
+          kind: 'concepto',
+          path: 'tipos-archivos',
+        },
+        {
+          id: 'n7-5',
+          title: '7.4 Dispositivos de E/S y terminales',
+          kind: 'concepto',
+          path: 'dispositivos-io',
+        },
+        {
+          id: 'n7-6',
+          title: '7.4.1 ioctl y 7.4.2 unidad de disco',
+          kind: 'concepto',
+          path: 'ioctl-disco',
+        },
+       
+      ],
+    },
+    {
+      id: 's8',
+      number: '08',
+      title: 'Señales del sistema',
+      summary: '',
+      duration: '',
+      path: 'signal',
+      notes :[
+        {
+          id: 'n8-1',
+          title: 'Introduccion a las Señales',
+          kind: 'concepto',
+          path: 'introduction',
+        },
+        {
+          id: 'n8-2',
+          title: 'Tipos de señales y kill',
+          kind: 'concepto',
+          path: 'tipos-senales',
+        },
+      ]
+    }
   ],
 };
 

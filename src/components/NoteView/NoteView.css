@@ -190,7 +190,8 @@
 .note-body > .wt-wrap,
 .note-body > .wpm-wrap,
 .note-body > .cow-wrap,
-.note-body > .code-explain { margin-top: var(--rhythm-block); }
+.note-body > .code-explain,
+.note-body > .zf-wrap { margin-top: var(--rhythm-block); }
 .note-body > .quote-card-wrap + *,
 .note-body > .prose-table-wrap + *,
 .note-body > .thinkers + *,
@@ -202,7 +203,8 @@
 .note-body > .wt-wrap + *,
 .note-body > .wpm-wrap + *,
 .note-body > .cow-wrap + *,
-.note-body > .code-explain + * { margin-top: var(--rhythm-block); }
+.note-body > .code-explain + *,
+.note-body > .zf-wrap + * { margin-top: var(--rhythm-block); }
 
 /* Paragraph runs stay compact — feels like prose, not isolated blocks. */
 .note-body > .prose-p + .prose-p { margin-top: calc(var(--rhythm) * 0.55); }
